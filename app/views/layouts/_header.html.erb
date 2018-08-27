@@ -1,0 +1,12 @@
+<div class="header-container">
+  <ul class="header-ul">
+    <li>
+      Total Players
+    </li>
+  </ul>
+  <%= form_for @user, :url => {:controller => 'users',:action => 'create'} do |f| %>
+    <%= f.label :address %>
+    <%= f.text_field :address, class:  'header-address' %>
+    <%= f.submit "Log in" %>
+  <% end %>
+</div>

@@ -1,0 +1,144 @@
+<div class="jp-container">
+  <%= render 'shared/flash_message' %>
+  <h1 class="top-title">Smart Contract Casino</h1>
+  <div class="jp-bottom">
+    <p class="jackpot">Jackpot</p>
+    <h3 class="jp-value"><span id="jp"><%= @jp %></span>ETH</h3>
+  </div>
+</div>
+<div class="tab-container">
+  <div class="tab-container-base">
+    <div class="tab-header">
+      <div>
+        <button class="tab-button-play">
+          Play
+        </button>
+        <button class="tab-button-play">
+          How to play
+        </button>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="tab-inner-content-play">
+        遊び場
+      </div>
+      <div class="tab-inner-content-play">
+        遊び方
+      </div>
+    </div>
+  </div>
+    <div class="tab-container-base">
+      <div class="tab-header">
+        <div>
+          <button class="tab-button-user">
+            My Page
+          </button>
+          <button class="tab-button-user">
+            Ranking
+          </button>
+          <button class="tab-button-user">
+            History
+          </button>
+        </div>
+      </div>
+      <div class="tab-content">
+        <div class="tab-inner-content">
+          マイページ
+        </div>
+        <div class="tab-inner-content">
+          ランキング
+        </div>
+        <div class="tab-inner-content">
+          履歴
+        </div>
+      </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function getWeb3() {
+        // Wait for loading completion to avoid race conditions with web3 injection timing.
+        return new Promise((resolve, reject) => {
+                var results;
+                var web3 = window.web3;
+                console.log(web3)
+                // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+                if (typeof web3 !== 'undefined') {
+                    // Use Mist/MetaMask's provider.
+                    web3 = new Web3(web3.currentProvider);
+
+                    results = {
+                        web3: web3
+                    };
+
+                    console.log('Injected web3 detected.');
+
+                    resolve(results)
+                } else {
+                    results = {
+                        web3: null
+                    };
+
+
+                    resolve(results)
+                }
+        })
+    }
+  $(function(){
+      //play tab setting
+      $('.tab-inner-content').hide();
+      $('.tab-inner-content').eq(0).show();
+      $('.tab-button-user').eq(0).addClass('button-active');
+      //click event
+      $('.tab-button-user').each(function () {
+          $(this).on('click', function () {
+              var index = $('.tab-button-user').index(this);
+              $('.tab-button-user').removeClass('button-active');
+              $(this).addClass('button-active');
+              $('.tab-inner-content').hide();
+              $('.tab-inner-content').eq(index).show();
+          })
+      });
+      //user tab setting
+      $('.tab-inner-content-play').hide();
+      $('.tab-inner-content-play').eq(0).show();
+      $('.tab-button-play').eq(0).addClass('button-active');
+      //click event
+      $('.tab-button-play').each(function () {
+          $(this).on('click', function () {
+              var index = $('.tab-button-play').index(this);
+              $('.tab-button-play').removeClass('button-active');
+              $(this).addClass('button-active');
+              $('.tab-inner-content-play').hide();
+              $('.tab-inner-content-play').eq(index).show();
+          })
+      });
+      $('#flash-message').fadeOut(3000);
+      $.getJSON('/FiftyFifty.json', function(data){
+          getWeb3().then(function(result){
+              window.web3 = result.web3;
+              const contract = window.web3.eth.contract(data.abi);
+              window.contract_instance = contract.at("0x05c9dabdcc658f437aab9571f44219b1edc4787b");
+              const Bet = window.contract_instance.Bet({
+                  _from: window.web3.eth.coinbase
+              },{
+                  fromBlock: 0,
+                  toBlock: 'latest'
+              });
+              Bet.watch(function(err,result){
+                  if(!err) {
+                      console.log(result)
+                  }
+              });
+          });
+      });
+      setInterval(function () {
+          $.ajax({
+              url: "/ethereum/jp",
+              type: "POST"
+          }).done(function(data){
+              $('span#jp').html(data.jp)
+          })
+      }, 1200);
+  })
+</script>

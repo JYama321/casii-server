@@ -1,0 +1,141 @@
+@import "bootstrap";
+
+.header-container{
+  width: 100%;
+  height: 60px;
+  position: relative;
+  background-color: #730E15;
+  ul{
+    width: 200px;
+    height: 100%;
+  }
+  li{
+    display: inline;
+    line-height: 60px;
+    width: 200px;
+    margin-left: 15px;
+    text-align: center;
+    color: white;
+  }
+  form{
+    width: 50%;
+    height: 100%;
+    display: inline;
+    position: absolute;
+    top: 5px;
+    left: 200px;
+  }
+}
+
+.jp-container{
+  width: 100%;
+  height: 400px;
+  background-color: rgba(160, 100, 100, 1);
+  position: relative;
+}
+
+.top-title{
+  width: 100%;
+  text-align: center;
+  line-height: 400px;
+  font-size: 32px;
+}
+
+.jp-bottom{
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  height: 150px;
+  width: 50%;
+}
+
+.jackpot{
+  position: absolute;
+  bottom: 80px;
+  font-size: 20px;
+}
+
+.jp-value{
+  position: absolute;
+  bottom: 7px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  font-size: 30px;
+}
+
+//tab
+
+.tab-container{
+  width: 100%;
+  height: 750px;
+  display: flex;
+  background-color: #730E15;
+}
+
+.tab-container-base{
+  display: block;
+  margin: 20px auto;
+  width: calc(50% - 40px);
+  height: calc(100% - 40px);
+  background-color: rgba(160, 100, 100, 1);
+}
+
+.tab-header{
+  width: 100%;
+  height: 35px;
+  div{
+    width: calc(100% - 14px);
+    margin: 0 auto;
+    height:100%;
+    button {
+      display: inline;
+      float: left;
+      position: relative;
+      line-height: 35px;
+      font-size: 18px;
+      width: 120px;
+      height: 100%;
+      text-align: center;
+      color: white;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+    .button-active{
+      background-color: black;
+      border: 1px solid rgba(150,150,150,0.6);
+      color: #fff;
+    }
+  }
+}
+
+.tab-content{
+  width: calc(100% - 14px);
+  height: 673px;
+  margin: 0 7px;
+  background-color: rgba(30,30,30,0.7);
+  position: relative;
+}
+
+.tab-inner-content{
+  width: 100%;
+  height: 100%;
+}
+
+.tab-inner-content-play{
+  width: 100%;
+  height: 100%;
+}
+
