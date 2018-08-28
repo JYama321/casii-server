@@ -1,5 +1,7 @@
 {
   "name": "casino-sample",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "ethereum-qr-code": "^0.3.0"
+  }
 }

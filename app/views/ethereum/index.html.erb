@@ -20,7 +20,68 @@
     </div>
     <div class="tab-content">
       <div class="tab-inner-content-play">
-        遊び場
+        <div id="hall-number-of-players">
+          <p class="hall-text">Halls</p>
+          <div class="hall-tab">
+            <button>
+              x2
+            </button>
+            <button>
+              x3
+            </button>
+            <button>
+              x6
+            </button>
+            <button>
+              x10
+            </button>
+            <button>
+              x???
+            </button>
+          </div>
+        </div>
+        <div id="hall-value-of-bets">
+          <p class="hall-text">The probability that you get jackpot is proportion to value of ETH you bet.</p>
+          <div class="hall-tab">
+            <button>
+              0.125
+            </button>
+            <button>
+              0.25
+            </button>
+            <button>
+              0.50
+            </button>
+            <button>
+              1
+            </button>
+            <button>
+              2
+            </button>
+            <button>
+              4
+            </button>
+            <button>
+              8
+            </button>
+            <button>
+              16
+            </button>
+            <button>
+              32
+            </button>
+            <button>
+              64
+            </button>
+          </div>
+        </div>
+        <div id="hall-qr-code">
+          <div id="hall-qr">
+          </div>
+          <div class="contract-address-info">
+            <p>0x05c9dabdcc658f437aab9571f44219b1edc4787b</p>
+          </div>
+        </div>
       </div>
       <div class="tab-inner-content-play">
         遊び方
@@ -54,8 +115,9 @@
       </div>
     </div>
 </div>
-
+<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <script type="text/javascript">
+    const contract_address = "0x05c9dabdcc658f437aab9571f44219b1edc4787b";
     function getWeb3() {
         // Wait for loading completion to avoid race conditions with web3 injection timing.
         return new Promise((resolve, reject) => {
@@ -114,11 +176,12 @@
           })
       });
       $('#flash-message').fadeOut(3000);
+      $('#hall-qr').qrcode({render: 'div', text: "ethereum:0x05c9dabdcc658f437aab9571f44219b1edc4787b?amount=1000000000000000000&gas=1000000"})
       $.getJSON('/FiftyFifty.json', function(data){
           getWeb3().then(function(result){
               window.web3 = result.web3;
               const contract = window.web3.eth.contract(data.abi);
-              window.contract_instance = contract.at("0x05c9dabdcc658f437aab9571f44219b1edc4787b");
+              window.contract_instance = contract.at(contract_address);
               const Bet = window.contract_instance.Bet({
                   _from: window.web3.eth.coinbase
               },{
