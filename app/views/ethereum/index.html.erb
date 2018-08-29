@@ -23,19 +23,19 @@
         <div id="hall-number-of-players">
           <p class="hall-text">Halls</p>
           <div class="hall-tab">
-            <button>
+            <button class="hall-type-tab-button">
               x2
             </button>
-            <button>
+            <button class="hall-type-tab-button">
               x3
             </button>
-            <button>
+            <button class="hall-type-tab-button">
               x6
             </button>
-            <button>
+            <button class="hall-type-tab-button">
               x10
             </button>
-            <button>
+            <button class="hall-type-tab-button">
               x???
             </button>
           </div>
@@ -43,34 +43,34 @@
         <div id="hall-value-of-bets">
           <p class="hall-text">The probability that you get jackpot is proportion to value of ETH you bet.</p>
           <div class="hall-tab">
-            <button>
+            <button class="hall-tab-value-button hall-tab-button-active">
               0.125
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               0.25
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               0.50
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               1
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               2
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               4
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               8
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               16
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               32
             </button>
-            <button>
+            <button class="hall-tab-value-button">
               64
             </button>
           </div>
@@ -80,6 +80,8 @@
           </div>
           <div class="contract-address-info">
             <p>0x05c9dabdcc658f437aab9571f44219b1edc4787b</p>
+            <p>Hall type: <span id="hall-type"></span></p>
+            <p>Bet Value: <span id="bet-value"></span> ETH</p>
           </div>
         </div>
       </div>
@@ -104,7 +106,13 @@
       </div>
       <div class="tab-content">
         <div class="tab-inner-content">
-          マイページ
+          <div class="my-page-text-field">
+          <%= form_for @user, :url => {:controller => 'users',:action => 'create'} do |f| %>
+            <%= f.label :address %>
+            <%= f.text_field :address, class:  'header-address' %>
+            <%= f.submit "Log in", class: 'login-submit'%>
+          <% end %>
+          </div>
         </div>
         <div class="tab-inner-content">
           ランキング
@@ -115,7 +123,6 @@
       </div>
     </div>
 </div>
-<script type="text/javascript" src="jquery.qrcode.min.js"></script>
 <script type="text/javascript">
     const contract_address = "0x05c9dabdcc658f437aab9571f44219b1edc4787b";
     function getWeb3() {
@@ -123,7 +130,6 @@
         return new Promise((resolve, reject) => {
                 var results;
                 var web3 = window.web3;
-                console.log(web3)
                 // Checking if Web3 has been injected by the browser (Mist/MetaMask)
                 if (typeof web3 !== 'undefined') {
                     // Use Mist/MetaMask's provider.
@@ -175,8 +181,43 @@
               $('.tab-inner-content-play').eq(index).show();
           })
       });
+      //login成功、失敗時のメッセージ
       $('#flash-message').fadeOut(3000);
-      $('#hall-qr').qrcode({render: 'div', text: "ethereum:0x05c9dabdcc658f437aab9571f44219b1edc4787b?amount=1000000000000000000&gas=1000000"})
+      $('#bet-value').html('0.125');
+      $('#hall-type').html('x2');
+      $('.hall-type-tab-button').eq(0).addClass('hall-tab-button-active');
+      $('.hall-type-tab-button').each(function () {
+          $(this).on('click', function () {
+              $('.hall-tab-value-button').removeClass('hall-tab-button-inactive');
+              $('.hall-type-tab-button').removeClass('hall-tab-button-active');
+              var index = $('.hall-type-tab-button').index(this);
+              var text = $(this).text().trim();
+              $(this).addClass('hall-tab-button-active');
+              //x2以外を選んだ時はbet valueをeq(3)に制限する
+              if(index !== 0){
+                  $('.hall-tab-value-button').removeClass('hall-tab-button-active');
+                  $('.hall-tab-value-button').addClass('hall-tab-button-inactive');
+                  $('.hall-tab-value-button').eq(3).removeClass('hall-tab-button-inactive');
+                  $('.hall-tab-value-button').eq(3).addClass('hall-tab-button-active');
+                  $('#bet-value').html('1')
+              }
+              $('#hall-type').html(text)
+          })
+      });
+      $('.hall-tab-value-button').eq(0).addClass('hall-tab-button-active');
+      $('.hall-tab-value-button').each(function () {
+          $(this).on('click', function () {
+              //x2以外が選択されている時は何もしない
+              var text = $(this).text().trim();
+              if($('.hall-tab-button-active').eq(0).text().trim() === 'x2'){
+                  $('.hall-tab-value-button').removeClass('hall-tab-button-active');
+                  $(this).addClass('hall-tab-button-active');
+                  //x2の時だけbet valueは変更される
+                  $('#bet-value').html(text)
+              }
+          })
+      });
+      $('#hall-qr').qrcode({render: 'div', text: `ethereum:0x05c9dabdcc658f437aab9571f44219b1edc4787b?amount=${$('#bet-value').text().trim()}&gas=1000000`})
       $.getJSON('/FiftyFifty.json', function(data){
           getWeb3().then(function(result){
               window.web3 = result.web3;
@@ -202,6 +243,6 @@
           }).done(function(data){
               $('span#jp').html(data.jp)
           })
-      }, 1200);
+      }, 2000);
   })
 </script>

@@ -1,27 +1,30 @@
 class EthereumController < ApplicationController
   require 'json'
+  require 'jsonclient'
+  include Common
 
   def index
-    get_web3
-    json_data = File.open(Rails.root.join('app/assets/contracts','FiftyFifty.json')) do |j|
-      JSON.parse(j.read)
-    end
-    contract = @web3.eth.contract(json_data["abi"])
-    contract_instance = contract.at(ENV["CONTRACT_ADDRESS"])
     @url=ENV["INFURA_ENDPOINT_RINKEBY"]
     @user = User.new
-    @client = HTTPClient.new
-    @jp =  Float(contract_instance.currentJackpot()) / (10 ** 18)
+    @client = JSONClient.new
+    params = {
+        "to":  "0x05c9dabdcc658f437aab9571f44219b1edc4787b",
+        "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
+    }
+    res = infura_rpc(params)
+    result = res["result"]
+    @jp =  Float(result) / (10 ** 18)
+    puts @jp
   end
 
   def jackpot_ajax
-    get_web3
-    json_data = File.open(Rails.root.join('app/assets/contracts','FiftyFifty.json')) do |j|
-      JSON.parse(j.read)
-    end
-    contract = @web3.eth.contract(json_data["abi"])
-    contract_instance = contract.at(ENV["CONTRACT_ADDRESS"])
-    @jp = Float(contract_instance.currentJackpot()) / (10 ** 18)
+    params = {
+        "to":  "0x05c9dabdcc658f437aab9571f44219b1edc4787b",
+        "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
+    }
+    res = infura_rpc(params)
+    result = res["result"]
+    @jp = Float(result) / (10 ** 18)
     respond_to do |format|
       format.json
     end
