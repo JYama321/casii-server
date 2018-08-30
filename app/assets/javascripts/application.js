@@ -17,4 +17,6 @@
 //= require bootstrap
 //= require activestorage
 //= require turbolinks
+//= require web3.min.js
+//= require abi-decoder/dist/abi-decoder.js
 //= require_tree .

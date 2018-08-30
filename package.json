@@ -2,6 +2,7 @@
   "name": "casino-sample",
   "private": true,
   "dependencies": {
+    "abi-decoder": "^1.2.0",
     "ethereum-qr-code": "^0.3.0"
   }
 }

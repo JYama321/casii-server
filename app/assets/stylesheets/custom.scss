@@ -226,3 +226,23 @@
   }
 }
 
+#event-logs{
+  width: 90%;
+  height: calc(100% - 30px);
+  margin: 15px auto;
+  overflow: scroll;
+  p{
+    color: white;
+    height: 60px;
+    font-size: 18px;
+    line-height: 30px;
+    border-bottom: 1px solid #000000;
+    width: 100%;
+    overflow-x: scroll;
+  }
+  span {
+    color: black;
+
+  }
+}
+

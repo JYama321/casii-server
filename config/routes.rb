@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   post '/user/new', to: 'users#create'
   get '/ethereum/jp', to: 'ethereum#jackpot_ajax'
   post '/ethereum/jp', to: 'ethereum#jackpot_ajax'
+  post '/ethereum/event', to: 'ethereum#event_logs'
 end

@@ -79,7 +79,7 @@
           <div id="hall-qr">
           </div>
           <div class="contract-address-info">
-            <p>0x05c9dabdcc658f437aab9571f44219b1edc4787b</p>
+            <p>0xdddc890ca4cf7abde0608f3e245d390a2f40a6f5</p>
             <p>Hall type: <span id="hall-type"></span></p>
             <p>Bet Value: <span id="bet-value"></span> ETH</p>
           </div>
@@ -118,13 +118,15 @@
           ランキング
         </div>
         <div class="tab-inner-content">
-          履歴
+          <div id="event-logs">
+          </div>
         </div>
       </div>
     </div>
 </div>
 <script type="text/javascript">
-    const contract_address = "0x05c9dabdcc658f437aab9571f44219b1edc4787b";
+    const contract_address = "0xdddc890ca4cf7abde0608f3e245d390a2f40a6f5";
+    var events = [];
     function getWeb3() {
         // Wait for loading completion to avoid race conditions with web3 injection timing.
         return new Promise((resolve, reject) => {
@@ -134,7 +136,6 @@
                 if (typeof web3 !== 'undefined') {
                     // Use Mist/MetaMask's provider.
                     web3 = new Web3(web3.currentProvider);
-
                     results = {
                         web3: web3
                     };
@@ -143,10 +144,11 @@
 
                     resolve(results)
                 } else {
+                    web3 = new Web3();
+                    web3.setProvider(new web3.providers.HttpProvider("https://rinkeby.infura.io/v3/c80185451d9f44f9848cfb331df03c35"));
                     results = {
-                        web3: null
+                        web3: web3
                     };
-
 
                     resolve(results)
                 }
@@ -217,22 +219,17 @@
               }
           })
       });
-      $('#hall-qr').qrcode({render: 'div', text: `ethereum:0x05c9dabdcc658f437aab9571f44219b1edc4787b?amount=${$('#bet-value').text().trim()}&gas=1000000`})
+      $('#hall-qr').qrcode({render: 'div', text: `ethereum:0xdddc890ca4cf7abde0608f3e245d390a2f40a6f5?amount=${$('#bet-value').text().trim()}&gas=1000000`});
       $.getJSON('/FiftyFifty.json', function(data){
           getWeb3().then(function(result){
+              console.log(result);
               window.web3 = result.web3;
               const contract = window.web3.eth.contract(data.abi);
+              abiDecoder.addABI(data.abi);
               window.contract_instance = contract.at(contract_address);
-              const Bet = window.contract_instance.Bet({
-                  _from: window.web3.eth.coinbase
-              },{
+              const Bet = window.contract_instance.Bet({},{
                   fromBlock: 0,
                   toBlock: 'latest'
-              });
-              Bet.watch(function(err,result){
-                  if(!err) {
-                      console.log(result)
-                  }
               });
           });
       });
@@ -242,6 +239,24 @@
               type: "POST"
           }).done(function(data){
               $('span#jp').html(data.jp)
+          })
+      }, 2000);
+      setInterval(function () {
+          $.ajax({
+              url: "/ethereum/event",
+              type: "POST"
+          }).done(function(data){
+              if(events.length !== data.logs.length) {
+                  events = data.logs;
+                  $.each(data.logs, function (index, elem) {
+                      window.web3.eth.getTransactionReceipt(elem.transactionHash, function(e, receit) {
+                          const decodeLogs = abiDecoder.decodeLogs(receit.logs);
+                          const winner = decodeLogs[0].events[0].value;
+                          const bet = decodeLogs[0].events[2].value;
+                          $('#event-logs').append('<p>' + winner + ' ' + bet / (10 ** 18) + '</p>')
+                      })
+                  })
+              }
           })
       }, 2000);
   })
