@@ -41,6 +41,7 @@ gem 'jquery-rails'
 gem 'jquery-qrcode-rails'
 gem 'httpclient'
 gem 'web3-eth'
+gem 'activerecord-import'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

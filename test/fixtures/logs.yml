@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contract_id: 
+  start_block: 
+  end_block: 
+
+two:
+  contract_id: 
+  start_block: 
+  end_block: 

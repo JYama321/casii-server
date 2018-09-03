@@ -246,3 +246,23 @@
   }
 }
 
+#ranking{
+  width: 100%;
+  height: 100%;
+  ul{
+    width: 100%;
+    height: calc(50% - 7px);
+    margin: 0;
+    border: 0;
+    padding-top: 7px;
+    li{
+      list-style: none;
+      width: 90%;
+      height: 35px;
+      margin: 7px auto;
+      text-align: center;
+      background-color: white;
+    }
+  }
+}
+

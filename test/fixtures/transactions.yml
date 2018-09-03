@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  t_hash: MyString
+  t_user_id: 1
+  t_send: 1
+  t_get: 1
+  t_time: 1
+
+two:
+  t_hash: MyString
+  t_user_id: 1
+  t_send: 1
+  t_get: 1
+  t_time: 1

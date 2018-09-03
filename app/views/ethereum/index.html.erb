@@ -79,7 +79,7 @@
           <div id="hall-qr">
           </div>
           <div class="contract-address-info">
-            <p>0xdddc890ca4cf7abde0608f3e245d390a2f40a6f5</p>
+            <p>0x0efc9628411a980639ec2f455ef7bab7603bbe74</p>
             <p>Hall type: <span id="hall-type"></span></p>
             <p>Bet Value: <span id="bet-value"></span> ETH</p>
           </div>
@@ -115,7 +115,18 @@
           </div>
         </div>
         <div class="tab-inner-content">
-          ランキング
+          <div id="ranking">
+            <ul>
+              <% @send_total_rank.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+              <% end %>
+            </ul>
+            <ul>
+              <%  @total_number_of_bets.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+              <% end %>
+            </ul>
+          </div>
         </div>
         <div class="tab-inner-content">
           <div id="event-logs">
@@ -125,7 +136,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    const contract_address = "0xdddc890ca4cf7abde0608f3e245d390a2f40a6f5";
+    const contract_address = "0x0efc9628411a980639ec2f455ef7bab7603bbe74";
     var events = [];
     function getWeb3() {
         // Wait for loading completion to avoid race conditions with web3 injection timing.
@@ -219,20 +230,20 @@
               }
           })
       });
-      $('#hall-qr').qrcode({render: 'div', text: `ethereum:0xdddc890ca4cf7abde0608f3e245d390a2f40a6f5?amount=${$('#bet-value').text().trim()}&gas=1000000`});
+      $('#hall-qr').qrcode({render: 'div', text: `ethereum:0x0efc9628411a980639ec2f455ef7bab7603bbe74?amount=${$('#bet-value').text().trim()}&gas=1000000`});
       $.getJSON('/FiftyFifty.json', function(data){
           getWeb3().then(function(result){
-              console.log(result);
               window.web3 = result.web3;
               const contract = window.web3.eth.contract(data.abi);
               abiDecoder.addABI(data.abi);
               window.contract_instance = contract.at(contract_address);
-              const Bet = window.contract_instance.Bet({},{
-                  fromBlock: 0,
-                  toBlock: 'latest'
-              });
           });
       });
+      $.ajax({
+          url: "/ethereum/ranking/send",
+          type: "POST"
+      })
+
       setInterval(function () {
           $.ajax({
               url: "/ethereum/jp",
@@ -240,7 +251,7 @@
           }).done(function(data){
               $('span#jp').html(data.jp)
           })
-      }, 2000);
+      }, 2500);
       setInterval(function () {
           $.ajax({
               url: "/ethereum/event",
@@ -250,14 +261,17 @@
                   events = data.logs;
                   $.each(data.logs, function (index, elem) {
                       window.web3.eth.getTransactionReceipt(elem.transactionHash, function(e, receit) {
+                          if(e){
+                              console.log(e)
+                          }
                           const decodeLogs = abiDecoder.decodeLogs(receit.logs);
                           const winner = decodeLogs[0].events[0].value;
                           const bet = decodeLogs[0].events[2].value;
-                          $('#event-logs').append('<p>' + winner + ' ' + bet / (10 ** 18) + '</p>')
+                          $('#event-logs').append('<p>' + winner + ' ' + bet / (10 ** 18) + ' ETH' + '</p>')
                       })
                   })
               }
           })
-      }, 2000);
+      }, 2500);
   })
 </script>

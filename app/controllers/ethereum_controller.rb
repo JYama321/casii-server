@@ -7,13 +7,9 @@ class EthereumController < ApplicationController
     @url=ENV["INFURA_ENDPOINT_RINKEBY"]
     @user = User.new
     @client = JSONClient.new
-    params = {
-        "to":  ENV["CONTRACT_ADDRESS"],
-        "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
-    }
-    res = infura_eth_call(params)
-    result = res["result"]
-    @jp =  Float(result) == 0 ? 0.00 : Float(result) / (10 ** 18)
+    @send_total_rank = Transaction.joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
+    @total_number_of_bets = Transaction.joins(:user).group("users.address").order('count_all desc').count
+    @jp = 0.00
   end
 
   def jackpot_ajax
@@ -22,8 +18,8 @@ class EthereumController < ApplicationController
         "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
     }
     res = infura_eth_call(params)
-    result = res["result"]
-    @jp = Float(result) == 0 ? 0.00 : Float(result) / (10 ** 18)
+    result = Float(res["result"])
+    @jp = result == 0 ? 0.00 : (result / (10 ** 18))
     puts @jp
     respond_to do |format|
       format.json
@@ -34,11 +30,15 @@ class EthereumController < ApplicationController
     params = {
         "fromBlock":"0x1",
         "toBlock": "latest",
-        "address":"0x05c9dabdcc658f437aab9571f44219b1edc4787b",
-        "topics":["0x2f7e081b637f086fe9a4ba1a33ef520aed864eb0339560563b8990894172e7cc"]
+        "address":"0x0efc9628411a980639ec2f455ef7bab7603bbe74",
+        "topics":["0x79332159d97b6c85dc0cb60c8b8c436f780180e3ed9181e69898fff5a9935b60"]
     }
     res = infura_eth_getLogs(params)
     @events = res["result"]
+  end
+
+  def aggregate_total_number_of_bet
+
   end
 
   private

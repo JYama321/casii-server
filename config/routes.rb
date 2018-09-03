@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   get '/ethereum/jp', to: 'ethereum#jackpot_ajax'
   post '/ethereum/jp', to: 'ethereum#jackpot_ajax'
   post '/ethereum/event', to: 'ethereum#event_logs'
+  post '/ethereum/ranking/send', to: 'ethereum#aggregate_total_number_of_bet'
 end
