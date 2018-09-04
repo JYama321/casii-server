@@ -7,14 +7,23 @@ class EthereumController < ApplicationController
     @url=ENV["INFURA_ENDPOINT_RINKEBY"]
     @user = User.new
     @client = JSONClient.new
+    #total bet rank
     @send_total_rank = Transaction.joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
+    @monthly_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
+    @weekly_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
+    @daily_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
+    # total number of transactions ranking
+    @daily_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
+    @weekly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
+    @monthly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
     @total_number_of_bets = Transaction.joins(:user).group("users.address").order('count_all desc').count
+
     @jp = 0.00
   end
 
   def jackpot_ajax
     params = {
-        "to":  ENV["CONTRACT_ADDRESS"],
+        "to":  ENV["CONTRACT_ADDRESS_FIFTY_FIFTY"],
         "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
     }
     res = infura_eth_call(params)
@@ -30,7 +39,7 @@ class EthereumController < ApplicationController
     params = {
         "fromBlock":"0x1",
         "toBlock": "latest",
-        "address":"0x0efc9628411a980639ec2f455ef7bab7603bbe74",
+        "address":"0x5ebe9c8e69144a5822f88ea1437f14bb85f53e6f",
         "topics":["0x79332159d97b6c85dc0cb60c8b8c436f780180e3ed9181e69898fff5a9935b60"]
     }
     res = infura_eth_getLogs(params)

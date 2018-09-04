@@ -66,22 +66,28 @@ class Tasks::Logs
     res = infura_eth_getLogs(params)
     events = res["result"]
     begin
-    events.each do |event|
-      tx_receit = infura_eth_getTransactionReceit(event["transactionHash"])
-      t_hash = tx_receit["result"]["transactionHash"]
-      from_address = tx_receit["result"]["from"]
-      user = User.new(address: from_address)
-      user.save
-      data = tx_receit["result"]["logs"][0]["data"]
-      t_send = data.slice(0,66).to_i(16)
-      t_get = ('0x' + data.slice(66,64)).to_i(16)
-      t_datetime = ('0x' + data.slice(130,64)).to_i(16)
-      t_user_id = User.find_by(address: from_address).id
-      transactions << Transaction.new(t_hash: t_hash, user_id: t_user_id, t_send: t_send, t_get: t_get, t_time: t_datetime)
-    end
-    Transaction.import(transactions)
-    log = Log.new(contract_id: 1, start_block: next_start_block.to_i(16), end_block: next_end_block.to_i(16))
-    log.save
+      events.each do |event|
+        tx_receit = infura_eth_getTransactionReceit(event["transactionHash"])
+        t_hash = tx_receit["result"]["transactionHash"]
+        from_address = tx_receit["result"]["from"]
+        data = tx_receit["result"]["logs"][0]["data"]
+        t_send = data.slice(0,66).to_i(16)
+        t_get = ('0x' + data.slice(66,64)).to_i(16)
+        t_datetime = ('0x' + data.slice(130,64)).to_i(16)
+
+        user = User.new(address: from_address)
+        if user.save
+          #userが新規だった場合
+          t_user_id = user.id
+        else
+          #userがすでに存在していた場合
+          t_user_id = User.find_by(address: from_address).id
+        end
+        transactions << Transaction.new(t_hash: t_hash, user_id: t_user_id, t_send: t_send, t_get: t_get, t_time: t_datetime)
+      end
+      Transaction.import(transactions)
+      log = Log.new(contract_id: 1, start_block: next_start_block.to_i(16), end_block: next_end_block.to_i(16))
+      log.save
     rescue => error
       puts "error occurred: #{error}"
     end

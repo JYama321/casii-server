@@ -135,6 +135,14 @@
   button.hall-tab-button-active{
     background-color: white;
   }
+  form{
+    label{
+      color: white;
+    }
+    input{
+      height: 25px;
+    }
+  }
 }
 
 .tab-inner-content-play{
@@ -204,6 +212,46 @@
   }
 }
 
+.my-page-content{
+  height: calc(100% - 100px);
+  width: 90%;
+  margin: 0 auto;
+  #my-page-logs{
+    height: 70%;
+    width: 100%;
+    overflow: scroll;
+    p {
+      font-size: 16px;
+      text-align: justify;
+      text-justify: inter-ideograph;
+      background-color: rgba(0,0,0,0.5);
+      margin: 7px auto;
+      width: 80%;
+      max-width: 320px;
+      height: 30px;
+      line-height: 30px;
+    }
+    p.my-event-red{
+      color: red;
+    }
+    p.my-event-blue{
+      color: blue;
+    }
+  }
+  #my-page-plus-minus{
+    height: 30%;
+    width: 100%;
+    top: 50px;
+    p {
+      font-size: 24px;
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+    }
+  }
+}
+
 .hall-text{
   color: white;
   height: 60px;
@@ -249,12 +297,43 @@
 #ranking{
   width: 100%;
   height: 100%;
+  p{
+    height: 30px;
+    width: 100%;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    font-size: 20px;
+  }
+  div{
+    height: 32px;
+    width: 90%;
+    display: flex;
+    margin: 0 auto;
+    button{
+      width: 25%;
+      height: 30px;
+      background-color: #730E15;
+      color: black;
+      line-height: 30px;
+      text-align: center;
+      border: none;
+      cursor: pointer;
+    }
+    button.button-active-rank-bet{
+      background-color: white;
+    }
+    button.button-active-rank-transaction{
+      background-color: white;
+    }
+  }
   ul{
     width: 100%;
-    height: calc(50% - 7px);
+    height: calc(50% - 65px);
     margin: 0;
     border: 0;
     padding-top: 7px;
+    overflow: scroll;
     li{
       list-style: none;
       width: 90%;

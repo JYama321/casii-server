@@ -79,7 +79,7 @@
           <div id="hall-qr">
           </div>
           <div class="contract-address-info">
-            <p>0x0efc9628411a980639ec2f455ef7bab7603bbe74</p>
+            <p id="contract-address-shown">0x0efc9628411a980639ec2f455ef7bab7603bbe74</p>
             <p>Hall type: <span id="hall-type"></span></p>
             <p>Bet Value: <span id="bet-value"></span> ETH</p>
           </div>
@@ -107,21 +107,89 @@
       <div class="tab-content">
         <div class="tab-inner-content">
           <div class="my-page-text-field">
-          <%= form_for @user, :url => {:controller => 'users',:action => 'create'} do |f| %>
-            <%= f.label :address %>
-            <%= f.text_field :address, class:  'header-address' %>
-            <%= f.submit "Log in", class: 'login-submit'%>
-          <% end %>
+          <form name="myinfo">
+            <label for="myaddress">Address</label>
+            <input id="myaddress" type="text">
+            <input type="button" value="get info" id="address-submit-button">
+          </form>
+          </div>
+          <div class="my-page-content">
+            <div id="my-page-plus-minus">
+              <p></p>
+            </div>
+            <div id="my-page-logs">
+
+            </div>
           </div>
         </div>
         <div class="tab-inner-content">
           <div id="ranking">
-            <ul>
+            <p>Ranking of total Bet</p>
+            <div>
+              <button class="total-bet-ranking">
+                Daily
+              </button>
+              <button class="total-bet-ranking">
+                Weekly
+              </button>
+              <button class="total-bet-ranking">
+                Monthly
+              </button>
+              <button class="total-bet-ranking">
+                Total
+              </button>
+            </div>
+            <ul class="tab-inner-content-bet-rank">
+              <% @daily_send_rank.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+              <% end %>
+            </ul>
+            <ul class="tab-inner-content-bet-rank">
+              <% @weekly_send_rank.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+              <% end %>
+            </ul>
+            <ul class="tab-inner-content-bet-rank">
+              <% @monthly_send_rank.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+              <% end %>
+            </ul>
+            <ul class="tab-inner-content-bet-rank">
               <% @send_total_rank.each_with_index do |obj, index| %>
                 <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
               <% end %>
             </ul>
-            <ul>
+            <p>Ranking of total transactions</p>
+            <div>
+              <button class="total-transaction-ranking">
+                Daily
+              </button>
+              <button class="total-transaction-ranking">
+                Weekly
+              </button>
+              <button class="total-transaction-ranking">
+                Monthly
+              </button>
+              <button class="total-transaction-ranking">
+                Total
+              </button>
+            </div>
+            <ul class="tab-inner-content-transaction-rank">
+              <%  @daily_total_number_of_bets.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+              <% end %>
+            </ul>
+            <ul class="tab-inner-content-transaction-rank">
+              <%  @weekly_total_number_of_bets.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+              <% end %>
+            </ul>
+            <ul class="tab-inner-content-transaction-rank">
+              <%  @monthly_total_number_of_bets.each_with_index do |obj, index| %>
+                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+              <% end %>
+            </ul>
+            <ul class="tab-inner-content-transaction-rank">
               <%  @total_number_of_bets.each_with_index do |obj, index| %>
                 <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
               <% end %>
@@ -136,8 +204,18 @@
     </div>
 </div>
 <script type="text/javascript">
-    const contract_address = "0x0efc9628411a980639ec2f455ef7bab7603bbe74";
-    var events = [];
+    const contract_addresses = [
+        "0x5ebe9c8e69144a5822f88ea1437f14bb85f53e6f",
+        "0x869e72ccfd2e6d71b41f2ac6bb480b6d1594bec2",
+        "0x9caf07c20ce793cc8c859cb7f48d66b21c8eec6f",
+        "0xee1efbd636991e262f2f3fb428a6d71aaf451c54"
+    ];
+    const contract_paths = [
+        "/FiftyFifty.json",
+    ];
+
+    var events, my_events, plus_minus;
+    [events, my_events, plus_minus] = [[],[], 0];
     function getWeb3() {
         // Wait for loading completion to avoid race conditions with web3 injection timing.
         return new Promise((resolve, reject) => {
@@ -160,12 +238,57 @@
                     results = {
                         web3: web3
                     };
-
                     resolve(results)
                 }
         })
     }
   $(function(){
+      //submit address button
+      $('#address-submit-button').click(function(e) {
+          e.preventDefault();
+          const address = $('#myaddress').val().trim();
+          const currentLogs = my_events.length;
+          my_events = [];
+          events.forEach(function(elem, index) {
+              window.web3.eth.getTransactionReceipt(elem.transactionHash,function (e, receit) {
+                  if (e) {
+                      console.log(e)
+                  }
+                  const from = receit.from;
+                  if (address === from) {
+                      const decodeLogs = abiDecoder.decodeLogs(receit.logs);
+                      const winner = decodeLogs[0].events[0].value;
+                      const looser = decodeLogs[0].events[1].value;
+                      const bet = Number(decodeLogs[0].events[2].value);
+                      const payBack = Number(decodeLogs[0].events[3].value);
+                      if( winner === address) {
+                          //勝ってた場合または掛けただけの時
+                          my_events.push({ bet: bet, payback: payBack });
+                          plus_minus += (payBack - bet);
+                      } else if ( looser === address ) {
+                          //負けてた場合
+                          my_events.push({ bet: bet, payback: payBack });
+                          plus_minus -= bet
+                      }
+                      if(my_events.length > currentLogs){
+                          if(payBack > 0){
+                              $('#my-page-logs').append('<p class="my-event-red"> Bet: ' + bet / (10 ** 18) + ' ETH' +  '  payBack: ' + payBack / (10 ** 18) + ' ETH</p>').css('color', 'red');
+                          } else {
+                              $('#my-page-logs').append('<p class="my-event-blue"> Bet: ' + bet / (10 ** 18) + ' ETH' +  '  payBack: ' + payBack / (10 ** 18) + ' ETH</p>').css('color', 'blue');
+                          }
+                      }
+                      if(events.length === index + 1) {
+                          if(plus_minus < 0){
+                              $('#my-page-plus-minus p').html((plus_minus / (10 ** 18)) + " ETH").css('color', 'blue');
+                          } else {
+                              $('#my-page-plus-minus p').html('+' +(plus_minus / (10 ** 18)) + " ETH").css('color', 'red');
+                          }
+                      }
+                  }
+              })
+          });
+      });
+
       //play tab setting
       $('.tab-inner-content').hide();
       $('.tab-inner-content').eq(0).show();
@@ -194,11 +317,38 @@
               $('.tab-inner-content-play').eq(index).show();
           })
       });
+      //Ranking Bet
+      $('.tab-inner-content-bet-rank').hide();
+      $('.tab-inner-content-bet-rank').eq(0).show();
+      $('.total-bet-ranking').eq(0).addClass('button-active-rank-bet');
+      $('.total-bet-ranking').each(function () {
+          $(this).on('click', function () {
+              var index = $('.total-bet-ranking').index(this);
+              $('.total-bet-ranking').removeClass('button-active-rank-bet');
+              $(this).addClass('button-active-rank-bet');
+              $('.tab-inner-content-bet-rank').hide();
+              $('.tab-inner-content-bet-rank').eq(index).show();
+          })
+      });
+      //Ranking Transaction
+      $('.tab-inner-content-transaction-rank').hide();
+      $('.tab-inner-content-transaction-rank').eq(0).show();
+      $('.total-transaction-ranking').eq(0).addClass('button-active-rank-transaction');
+      $('.total-transaction-ranking').each(function () {
+          $(this).on('click', function () {
+              var index = $('.total-transaction-ranking').index(this);
+              $('.total-transaction-ranking').removeClass('button-active-rank-transaction');
+              $(this).addClass('button-active-rank-transaction');
+              $('.tab-inner-content-transaction-rank').hide();
+              $('.tab-inner-content-transaction-rank').eq(index).show();
+          })
+      });
       //login成功、失敗時のメッセージ
       $('#flash-message').fadeOut(3000);
       $('#bet-value').html('0.125');
-      $('#hall-type').html('x2');
+      $('#hall-type').html($('.hall-type-tab-button').eq(0).text().trim());
       $('.hall-type-tab-button').eq(0).addClass('hall-tab-button-active');
+      //何人用のhallかを選択
       $('.hall-type-tab-button').each(function () {
           $(this).on('click', function () {
               $('.hall-tab-value-button').removeClass('hall-tab-button-inactive');
@@ -206,6 +356,7 @@
               var index = $('.hall-type-tab-button').index(this);
               var text = $(this).text().trim();
               $(this).addClass('hall-tab-button-active');
+              const c_address = contract_addresses[index];
               //x2以外を選んだ時はbet valueをeq(3)に制限する
               if(index !== 0){
                   $('.hall-tab-value-button').removeClass('hall-tab-button-active');
@@ -214,7 +365,10 @@
                   $('.hall-tab-value-button').eq(3).addClass('hall-tab-button-active');
                   $('#bet-value').html('1')
               }
-              $('#hall-type').html(text)
+              $('#hall-type').html(text);
+              $('#hall-qr').empty();
+              $('#hall-qr').qrcode({render: 'div', text: `ethereum:${c_address}?amount=${$('#bet-value').text().trim()}&gas=1000000`});
+              $('#contract-address-shown').html(c_address)
           })
       });
       $('.hall-tab-value-button').eq(0).addClass('hall-tab-button-active');
@@ -226,24 +380,29 @@
                   $('.hall-tab-value-button').removeClass('hall-tab-button-active');
                   $(this).addClass('hall-tab-button-active');
                   //x2の時だけbet valueは変更される
-                  $('#bet-value').html(text)
+                  $('#bet-value').html(text);
+                  //qr コードのamountも変更
+                  $('#hall-qr').empty();
+                  $('#hall-qr').qrcode({render: 'div', text: `ethereum:${contract_addresses[0]}?amount=${text.trim()}&gas=1000000`});
               }
           })
       });
-      $('#hall-qr').qrcode({render: 'div', text: `ethereum:0x0efc9628411a980639ec2f455ef7bab7603bbe74?amount=${$('#bet-value').text().trim()}&gas=1000000`});
-      $.getJSON('/FiftyFifty.json', function(data){
+      //qr code 最初の表示
+      $('#hall-qr').qrcode({render: 'div', text: `ethereum:${contract_addresses[0]}?amount=${$('#bet-value').text().trim()}&gas=1000000`});
+      $('#contract-address-shown').html(contract_addresses[0]);
+      //abi-decoderへのabiセット。最初
+      $.getJSON("/FiftyFifty.json", function(data){
           getWeb3().then(function(result){
               window.web3 = result.web3;
               const contract = window.web3.eth.contract(data.abi);
               abiDecoder.addABI(data.abi);
-              window.contract_instance = contract.at(contract_address);
+              window.contract_instance = contract.at(contract_addresses[0]);
           });
       });
       $.ajax({
           url: "/ethereum/ranking/send",
           type: "POST"
-      })
-
+      });
       setInterval(function () {
           $.ajax({
               url: "/ethereum/jp",
@@ -259,15 +418,17 @@
           }).done(function(data){
               if(events.length !== data.logs.length) {
                   events = data.logs;
-                  $.each(data.logs, function (index, elem) {
+                  $.each(events, function (index, elem) {
                       window.web3.eth.getTransactionReceipt(elem.transactionHash, function(e, receit) {
                           if(e){
                               console.log(e)
                           }
-                          const decodeLogs = abiDecoder.decodeLogs(receit.logs);
-                          const winner = decodeLogs[0].events[0].value;
-                          const bet = decodeLogs[0].events[2].value;
-                          $('#event-logs').append('<p>' + winner + ' ' + bet / (10 ** 18) + ' ETH' + '</p>')
+                          if(events.length > index) {
+                              const decodeLogs = abiDecoder.decodeLogs(receit.logs);
+                              const winner = decodeLogs[0].events[0].value;
+                              const bet = decodeLogs[0].events[2].value;
+                              $('#event-logs').append('<p>' + winner + ' ' + bet / (10 ** 18) + ' ETH' + '</p>')
+                          }
                       })
                   })
               }
