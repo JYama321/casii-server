@@ -51,11 +51,15 @@ class Tasks::Logs
     JSON.parse(res.body)
   end
 
-  def self.batch_get_logs_one
+  def self.batch_get_logs_contract_one
     log = Log.order("created_at desc").limit(1)
+    puts log
     previous_end_block = log[0].end_block + 1
     next_end_block = infura_eth_getBlock["result"]
     next_start_block = sprintf("%#x",previous_end_block + 1)
+    puts next_end_block
+    puts next_start_block
+    puts "batch_get_logs_one"
     transactions = []
     params = {
         "fromBlock": next_start_block,

@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2018_08_31_043302) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "invitation_code"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x00007f837e46baf0>"
+    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x00007fb133b043c0>"
     t.index ["address"], name: "index_users_on_address", unique: true
     t.index ["invitation_code"], name: "index_users_on_invitation_code", unique: true
   end

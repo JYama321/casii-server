@@ -124,76 +124,125 @@
         </div>
         <div class="tab-inner-content">
           <div id="ranking">
-            <p>Ranking of total Bet</p>
-            <div>
-              <button class="total-bet-ranking">
-                Daily
+            <div id="ranking-tabs">
+              <button class="ranking-tab-button">
+                amount of Bet
               </button>
-              <button class="total-bet-ranking">
-                Weekly
+              <button class="ranking-tab-button">
+                transactions
               </button>
-              <button class="total-bet-ranking">
-                Monthly
-              </button>
-              <button class="total-bet-ranking">
-                Total
+              <button class="ranking-tab-button">
+                balances
               </button>
             </div>
-            <ul class="tab-inner-content-bet-rank">
-              <% @daily_send_rank.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
-              <% end %>
-            </ul>
-            <ul class="tab-inner-content-bet-rank">
-              <% @weekly_send_rank.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
-              <% end %>
-            </ul>
-            <ul class="tab-inner-content-bet-rank">
-              <% @monthly_send_rank.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
-              <% end %>
-            </ul>
-            <ul class="tab-inner-content-bet-rank">
-              <% @send_total_rank.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
-              <% end %>
-            </ul>
-            <p>Ranking of total transactions</p>
-            <div>
-              <button class="total-transaction-ranking">
-                Daily
-              </button>
-              <button class="total-transaction-ranking">
-                Weekly
-              </button>
-              <button class="total-transaction-ranking">
-                Monthly
-              </button>
-              <button class="total-transaction-ranking">
-                Total
-              </button>
+            <div class="ranking-contents">
+              <div>
+                <button class="total-bet-ranking">
+                  Daily
+                </button>
+                <button class="total-bet-ranking">
+                  Weekly
+                </button>
+                <button class="total-bet-ranking">
+                  Monthly
+                </button>
+                <button class="total-bet-ranking">
+                  Total
+                </button>
+              </div>
+              <ul class="tab-inner-content-bet-rank">
+                <% @daily_send_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-bet-rank">
+                <% @weekly_send_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-bet-rank">
+                <% @monthly_send_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-bet-rank">
+                <% @send_total_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
             </div>
-            <ul class="tab-inner-content-transaction-rank">
-              <%  @daily_total_number_of_bets.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
-              <% end %>
-            </ul>
-            <ul class="tab-inner-content-transaction-rank">
-              <%  @weekly_total_number_of_bets.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
-              <% end %>
-            </ul>
-            <ul class="tab-inner-content-transaction-rank">
-              <%  @monthly_total_number_of_bets.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
-              <% end %>
-            </ul>
-            <ul class="tab-inner-content-transaction-rank">
-              <%  @total_number_of_bets.each_with_index do |obj, index| %>
-                <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
-              <% end %>
-            </ul>
+            <div class="ranking-contents">
+              <div>
+                <button class="total-transaction-ranking">
+                  Daily
+                </button>
+                <button class="total-transaction-ranking">
+                  Weekly
+                </button>
+                <button class="total-transaction-ranking">
+                  Monthly
+                </button>
+                <button class="total-transaction-ranking">
+                  Total
+                </button>
+              </div>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @daily_total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @weekly_total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @monthly_total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= obj[1] %> transactions</li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="ranking-contents">
+              <div>
+                <button class="total-transaction-ranking">
+                  Daily
+                </button>
+                <button class="total-transaction-ranking">
+                  Weekly
+                </button>
+                <button class="total-transaction-ranking">
+                  Monthly
+                </button>
+                <button class="total-transaction-ranking">
+                  Total
+                </button>
+              </div>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @daily_balance_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @weekly_balance_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @monthly_balance_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj.address %>: <%= Float(obj.balance) / (10 ** 18)%>ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @total_balance_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj.address %>: <%= Float(obj.balance) / (10 ** 18)%> ETH</li>
+                <% end %>
+              </ul>
+            </div>
           </div>
         </div>
         <div class="tab-inner-content">
@@ -214,8 +263,8 @@
         "/FiftyFifty.json",
     ];
 
-    var events, my_events, plus_minus;
-    [events, my_events, plus_minus] = [[],[], 0];
+    var events, my_events, plus_minus, hall_type_index;
+    [events, my_events, plus_minus, hall_type_index] = [[],[], 0, 0];
     function getWeb3() {
         // Wait for loading completion to avoid race conditions with web3 injection timing.
         return new Promise((resolve, reject) => {
@@ -289,6 +338,20 @@
           });
       });
 
+      //ranking tab button
+      $('.ranking-contents').hide();
+      $('.ranking-contents').eq(0).show();
+      $('.ranking-tab-button').eq(0).addClass('active');
+      $('.ranking-tab-button').each(function () {
+         $(this).on('click', function () {
+             var index = $('.ranking-tab-button').index(this);
+             $('.ranking-tab-button').removeClass('active');
+             $(this).addClass('active');
+             $('.ranking-contents').hide();
+             $('.ranking-contents').eq(index).show();
+         })
+      });
+
       //play tab setting
       $('.tab-inner-content').hide();
       $('.tab-inner-content').eq(0).show();
@@ -354,6 +417,7 @@
               $('.hall-tab-value-button').removeClass('hall-tab-button-inactive');
               $('.hall-type-tab-button').removeClass('hall-tab-button-active');
               var index = $('.hall-type-tab-button').index(this);
+              hall_type_index = index
               var text = $(this).text().trim();
               $(this).addClass('hall-tab-button-active');
               const c_address = contract_addresses[index];
@@ -406,7 +470,8 @@
       setInterval(function () {
           $.ajax({
               url: "/ethereum/jp",
-              type: "POST"
+              type: "POST",
+              data: { contract_address: contract_addresses[hall_type_index] }
           }).done(function(data){
               $('span#jp').html(data.jp)
           })
@@ -418,11 +483,14 @@
           }).done(function(data){
               if(events.length !== data.logs.length) {
                   events = data.logs;
+                  console.log('events :', events);
                   $.each(events, function (index, elem) {
                       window.web3.eth.getTransactionReceipt(elem.transactionHash, function(e, receit) {
                           if(e){
                               console.log(e)
+                              return ;
                           }
+                          console.log('receipt: ',receit,e)
                           if(events.length > index) {
                               const decodeLogs = abiDecoder.decodeLogs(receit.logs);
                               const winner = decodeLogs[0].events[0].value;

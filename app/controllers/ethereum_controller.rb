@@ -15,19 +15,24 @@ class EthereumController < ApplicationController
     # total number of transactions ranking
     @daily_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
     @weekly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
-    @monthly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
+    @monthly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, +1).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
     @total_number_of_bets = Transaction.joins(:user).group("users.address").order('count_all desc').count
+    # total balance
+    @daily_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
+    @weekly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
+    @monthly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
+    @total_balance_rank = Transaction.joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
 
     @jp = 0.00
   end
 
   def jackpot_ajax
-    params = {
-        "to":  ENV["CONTRACT_ADDRESS_FIFTY_FIFTY"],
+    parameters = {
+        "to":  params[:contract_address],
         "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
     }
-    res = infura_eth_call(params)
-    result = Float(res["result"])
+    res = infura_eth_call(parameters)
+    result = res["result"] == "0x0000000000000000000000000000000000000000000000000000000000000000" ? 0.0 : Float(res["result"])
     @jp = result == 0 ? 0.00 : (result / (10 ** 18))
     puts @jp
     respond_to do |format|

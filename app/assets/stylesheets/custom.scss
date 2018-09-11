@@ -296,7 +296,25 @@
 
 #ranking{
   width: 100%;
-  height: 100%;
+  height: calc(100% - 30px);
+  #ranking-tabs{
+    width: 100%;
+    height: 30px;
+    .ranking-tab-button{
+      width: 32%;
+      height: 30px;
+      line-height: 30px;
+      font-size: 18px;
+      border: none;
+      outline: none;
+      margin: 0;
+      padding: 0;
+      background-color: transparent;
+    }
+    button.active{
+      background-color: white;
+    }
+  }
   p{
     height: 30px;
     width: 100%;
@@ -305,31 +323,35 @@
     color: white;
     font-size: 20px;
   }
-  div{
-    height: 32px;
-    width: 90%;
-    display: flex;
-    margin: 0 auto;
-    button{
-      width: 25%;
-      height: 30px;
-      background-color: #730E15;
-      color: black;
-      line-height: 30px;
-      text-align: center;
-      border: none;
-      cursor: pointer;
-    }
-    button.button-active-rank-bet{
-      background-color: white;
-    }
-    button.button-active-rank-transaction{
-      background-color: white;
-    }
+  div.ranking-contents {
+    width: 100%;
+    height: 100%;
+    div{
+      height: 32px;
+      width: 90%;
+      display: flex;
+      margin: 0 auto;
+      button{
+        width: 25%;
+        height: 30px;
+        background-color: #730E15;
+        color: black;
+        line-height: 30px;
+        text-align: center;
+        border: none;
+        cursor: pointer;
+      }
+      button.button-active-rank-bet{
+        background-color: white;
+      }
+      button.button-active-rank-transaction{
+        background-color: white;
+      }
+  }
   }
   ul{
     width: 100%;
-    height: calc(50% - 65px);
+    height: calc(100% - 65px);
     margin: 0;
     border: 0;
     padding-top: 7px;
@@ -344,4 +366,3 @@
     }
   }
 }
-

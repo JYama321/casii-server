@@ -20,6 +20,7 @@ module Common
   def infura_eth_getLogs(**params)
     endpoint = ENV["INFURA_ENDPOINT_RINKEBY"]
     client = JSONClient.new
+    puts "start get infura logs"
     res = client.post(endpoint, {
         "Content-Type": "application/json",
         :body => {
@@ -29,6 +30,8 @@ module Common
             "id": 10
         }
     })
+    puts "end get infura logs"
+    puts res
     JSON.parse(res.body)
   end
 end
