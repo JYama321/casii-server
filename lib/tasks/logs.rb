@@ -53,22 +53,19 @@ class Tasks::Logs
 
   def self.batch_get_logs_contract_one
     log = Log.order("created_at desc").limit(1)
-    puts log
     previous_end_block = log[0].end_block + 1
     next_end_block = infura_eth_getBlock["result"]
     next_start_block = sprintf("%#x",previous_end_block + 1)
-    puts next_end_block
-    puts next_start_block
-    puts "batch_get_logs_one"
     transactions = []
     params = {
         "fromBlock": next_start_block,
         "toBlock": next_end_block,
-        "address":"0x0efc9628411a980639ec2f455ef7bab7603bbe74",
+        "address":"0x5ebe9c8e69144a5822f88ea1437f14bb85f53e6f",
         "topics":["0x79332159d97b6c85dc0cb60c8b8c436f780180e3ed9181e69898fff5a9935b60"]
     }
     res = infura_eth_getLogs(params)
     events = res["result"]
+    puts events
     begin
       events.each do |event|
         tx_receit = infura_eth_getTransactionReceit(event["transactionHash"])
