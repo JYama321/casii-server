@@ -152,22 +152,22 @@
               </div>
               <ul class="tab-inner-content-bet-rank">
                 <% @daily_send_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1])%> ETH</li>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
                 <% end %>
               </ul>
               <ul class="tab-inner-content-bet-rank">
                 <% @weekly_send_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1])%> ETH</li>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
                 <% end %>
               </ul>
               <ul class="tab-inner-content-bet-rank">
                 <% @monthly_send_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1])%> ETH</li>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
                 <% end %>
               </ul>
               <ul class="tab-inner-content-bet-rank">
                 <% @send_total_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1])%> ETH</li>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
                 <% end %>
               </ul>
             </div>
@@ -239,7 +239,7 @@
               </ul>
               <ul class="tab-inner-content-balance-rank">
                 <%  @total_balance_rank.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance) %> ETH</li>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
                 <% end %>
               </ul>
             </div>
