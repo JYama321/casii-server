@@ -332,7 +332,7 @@
     div.ranking-duration-tab{
       margin-top: 7px;
     }
-  ul.tab-inner-content-transaction-rank{
+  ul{
       li{
         display: flex;
         p{
@@ -342,12 +342,12 @@
           font-size: 18px;
         }
         p.tx-address{
-          width: 40%;
+          width: 50%;
           height: 100%;
           overflow-x: scroll;
         }
         p.tx-numbers{
-          width: 40%;
+          width: 30%;
           height: 100%;
           text-align: center;
           overflow-x: scroll;

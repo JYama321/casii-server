@@ -224,22 +224,22 @@
               </div>
               <ul class="tab-inner-content-balance-rank">
                 <%  @daily_balance_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj.address %>: <%= Float(obj.balance) %> ETH</li>
+                  <li><p><%= index+1 %>: </p>  </span><p class="tx-address"><%= obj.address %> </p>: <%= Float(obj.balance).round(3) %> ETH</li>
                 <% end %>
               </ul>
               <ul class="tab-inner-content-balance-rank">
                 <%  @weekly_balance_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj.address %>: <%= Float(obj.balance) %> ETH</li>
+                  <li><p><%= index+1 %>: </p> <p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
                 <% end %>
               </ul>
               <ul class="tab-inner-content-balance-rank">
                 <%  @monthly_balance_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj.address %>: <%= Float(obj.balance) %> ETH</li>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
                 <% end %>
               </ul>
               <ul class="tab-inner-content-balance-rank">
                 <%  @total_balance_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj.address %>: <%= Float(obj.balance) %> ETH</li>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance) %> ETH</li>
                 <% end %>
               </ul>
             </div>

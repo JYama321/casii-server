@@ -44,7 +44,7 @@ class EthereumController < ApplicationController
     params = {
         "fromBlock":"0x1",
         "toBlock": "latest",
-        "address":"0x5ebe9c8e69144a5822f88ea1437f14bb85f53e6f",
+        "address":"0x9cb4f5fb9bc5f3a3918c1d90c9f0236406d6c106",
         "topics":["0x79332159d97b6c85dc0cb60c8b8c436f780180e3ed9181e69898fff5a9935b60"]
     }
     res = infura_eth_getLogs(params)
