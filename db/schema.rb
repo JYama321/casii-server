@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 2018_08_31_043302) do
   create_table "transactions", force: :cascade do |t|
     t.string "t_hash", limit: 20
     t.integer "user_id"
-    t.integer "t_send"
-    t.integer "t_get"
+    t.float "t_send"
+    t.float "t_get"
     t.integer "t_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

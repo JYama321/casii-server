@@ -72,8 +72,8 @@ class Tasks::Logs
         t_hash = tx_receit["result"]["transactionHash"]
         from_address = tx_receit["result"]["from"]
         data = tx_receit["result"]["logs"][0]["data"]
-        t_send = data.slice(0,66).to_i(16)
-        t_get = ('0x' + data.slice(66,64)).to_i(16)
+        t_send = data.slice(0,66).to_i(16) / (10 ** 18)
+        t_get = ('0x' + data.slice(66,64)).to_i(16) / (10 ** 18)
         t_datetime = ('0x' + data.slice(130,64)).to_i(16)
 
         user = User.new(address: from_address)
