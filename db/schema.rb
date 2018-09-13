@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2018_08_31_043302) do
 
-  create_table "logs", force: :cascade do |t|
+  create_table "logs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "contract_id"
     t.integer "start_block"
     t.integer "end_block"
@@ -22,25 +22,23 @@ ActiveRecord::Schema.define(version: 2018_08_31_043302) do
     t.string "fail_t_hash"
   end
 
-  create_table "transactions", force: :cascade do |t|
-    t.string "t_hash", limit: 20
-    t.integer "user_id"
-    t.float "t_send"
-    t.float "t_get"
+  create_table "transactions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "t_hash"
+    t.bigint "user_id"
+    t.integer "t_send"
+    t.integer "t_get"
     t.integer "t_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "address", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "invitation_code"
-    t.integer "#<ActiveRecord::ConnectionAdapters::SQLite3::TableDefinition:0x00007fb133b043c0>"
-    t.index ["address"], name: "index_users_on_address", unique: true
-    t.index ["invitation_code"], name: "index_users_on_invitation_code", unique: true
+    t.index ["address"], name: "address_index", unique: true
   end
 
+  add_foreign_key "transactions", "users"
 end
