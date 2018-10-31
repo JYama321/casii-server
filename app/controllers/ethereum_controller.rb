@@ -29,7 +29,6 @@ class EthereumController < ApplicationController
     @weekly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, week_day).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
     @monthly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
     @total_balance_rank = Transaction.joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
-
     render layout: 'application'
   end
 
@@ -42,7 +41,6 @@ class EthereumController < ApplicationController
     res = infura_eth_call(parameters)
     result = res["result"] == "0x0000000000000000000000000000000000000000000000000000000000000000" ? 0.0 : Float(res["result"])
     @jp = result == 0 ? 0.00 : (result / (10 ** 18))
-    puts @jp
     respond_to do |format|
       format.json
     end

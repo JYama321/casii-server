@@ -49,7 +49,6 @@
           <h2 class="tab-head-1 active-1"><%= image_tag("tab/tab_play.png", :width => "200", :alt => "play") %></h2>
           <div class="tabBody-1">
             <div class="inner">
-              <form action="XXXXX" method="post">
                 <p>Halls</p>
                 <div class="play_btn">
                   <input id="btn1-item1" type="radio" name="btn1" value="XX" onclick="playBTN1_1();" checked>
@@ -64,33 +63,33 @@
                 <p>The probability that you get jackpot is<br>
                   proportion to value of ETH you bet.</p>
                 <div class="play_btn">
-                  <input id="btn2-item1" type="radio" name="btn2" value="XX" onclick="playBTN2_1();" checked>
-                  <label class="play_btn_item btn2" for="btn2-item1">0.125</label>
+                  <input id="btn2-item1" type="radio" name="btn2" value="XX" checked>
+                  <button class="play_btn_item btn2" onclick="playBTN2_1();">0.125</button>
                   <input id="btn2-item2" type="radio" name="btn2" value="XX" onclick="playBTN2_2();">
-                  <label class="play_btn_item btn2" for="btn2-item2">0.25</label>
-                  <input id="btn2-item3" type="radio" name="btn2" value="XX" onclick="playBTN2_3();">
-                  <label class="play_btn_item btn2" for="btn2-item3">0.50</label>
-                  <input id="btn2-item4" type="radio" name="btn2" value="XX" onclick="playBTN2_4();">
-                  <label class="play_btn_item btn2" for="btn2-item4">1</label>
-                  <input id="btn2-item5" type="radio" name="btn2" value="XX" onclick="playBTN2_5();">
-                  <label class="play_btn_item btn2 last" for="btn2-item5">2</label>
-                  <input id="btn2-item6" type="radio" name="btn2" value="XX" onclick="playBTN2_6();">
-                  <label class="play_btn_item btn2" for="btn2-item6">4</label>
-                  <input id="btn2-item7" type="radio" name="btn2" value="XX" onclick="playBTN2_7();">
-                  <label class="play_btn_item btn2" for="btn2-item7">8</label>
-                  <input id="btn2-item8" type="radio" name="btn2" value="XX" onclick="playBTN2_8();">
-                  <label class="play_btn_item btn2" for="btn2-item8">16</label>
-                  <input id="btn2-item9" type="radio" name="btn2" value="XX" onclick="playBTN2_9();">
-                  <label class="play_btn_item btn2" for="btn2-item9">32</label>
-                  <input id="btn2-item10" type="radio" name="btn2" value="XX" onclick="playBTN2_10();">
-                  <label class="play_btn_item btn2 last" for="btn2-item10">64</label>
+                  <button class="play_btn_item btn2" onclick="playBTN2_2()">0.25</button>
+                  <input id="btn2-item3" type="radio" name="btn2" value="XX">
+                  <button class="play_btn_item btn2" onclick="playBTN2_3()">0.50</button>
+                  <input id="btn2-item4" type="radio" name="btn2" value="XX">
+                  <button class="play_btn_item btn2" onclick="playBTN2_4()">1</button>
+                  <input id="btn2-item5" type="radio" name="btn2" value="XX">
+                  <button class="play_btn_item btn2 last" onclick="playBTN2_5()">2</button>
+                  <input id="btn2-item6" type="radio" name="btn2" value="XX">
+                  <button class="play_btn_item btn2" onclick="playBTN2_6()">4</button>
+                  <input id="btn2-item7" type="radio" name="btn2" value="XX">
+                  <button class="play_btn_item btn2" onclick="playBTN2_6()">8</button>
+                  <input id="btn2-item8" type="radio" name="btn2" value="XX" >
+                  <button class="play_btn_item btn2" onclick="playBTN2_8();">16</button>
+                  <input id="btn2-item9" type="radio" name="btn2" value="XX">
+                  <button class="play_btn_item btn2" onclick="playBTN2_9();">32</button>
+                  <input id="btn2-item10" type="radio" name="btn2" value="XX" >
+                  <button class="play_btn_item btn2 last" onclick="playBTN2_10();">64</button>
                 </div>
                 <dl class="play_bottom">
                   <dd><%= image_tag("play/qr.png", :width => "150", :alt => "QR") %></dd>
                   <dd>
                     <div class="container">
                       <div class="scroll-pane horizontal-only">
-                        <p>
+                        <p id="current-hall-address">
                           0x9cb4f5fb9bc5f3a3918c1d90c9f0
                         </p>
                       </div>
@@ -105,8 +104,6 @@
                     </div>
                   </dd>
                 </dl>
-
-              </form>
             </div><!-- /.inner -->
           </div><!-- /.tabBody -->
 

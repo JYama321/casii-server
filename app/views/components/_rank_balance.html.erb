@@ -5,16 +5,16 @@
     </li>
     <li class='<%= "rank#{index+1}_bg"%>'>
       <div class='<%= "rank#{index+1}_txt BS3-#{index+1}_list1" %>'>
-        <%= obj[0] %>
+        <%= obj.address %>
       </div>
       <div class='<%=  "BS3-#{index+1}_list2" %>'>
-        <%= obj[1] ? Float(obj[1]).round(3) : ""%>  ETH
+        <%= Float(obj.balance).round(3) %>  ETH
       </div>
     </li>
   </ul>
 <% else %>
   <UL class="rank"><li>4</li>
-    <li><div class="BS3-4_list1"><%= obj[0] %>></div></li>
-    <li><div class="BS3-4_list2"><%= obj[1] ? Float(obj[1]).round(3) : "" %> ETH</div></li>
+    <li><div class="BS3-4_list1"><%= obj %>></div></li>
+    <li><div class="BS3-4_list2"><%= Float(obj.balance).round(3) %> ETH</div></li>
   </ul>
 <% end %>

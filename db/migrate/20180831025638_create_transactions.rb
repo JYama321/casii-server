@@ -3,8 +3,8 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
     create_table :transactions do |t|
       t.string :t_hash, :limit => 255
       t.references :user, :foreign_key => true
-      t.integer :t_send
-      t.integer :t_get
+      t.float :t_send
+      t.float :t_get
       t.integer :t_time
 
       t.timestamps

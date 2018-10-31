@@ -1,11 +1,3 @@
-
-//smart contract addresses
-const contract_addresses = [
-    "0x9cb4f5fb9bc5f3a3918c1d90c9f0236406d6c106",
-    "0x869e72ccfd2e6d71b41f2ac6bb480b6d1594bec2",
-    "0x9caf07c20ce793cc8c859cb7f48d66b21c8eec6f",
-    "0xee1efbd636991e262f2f3fb428a6d71aaf451c54"
-];
 //path to abi
 const contract_paths = [
     "/FiftyFifty.json",
@@ -173,51 +165,7 @@ $(function(){
     //     })
     // });
 
-    //login成功、失敗時のメッセージ
-    $('#flash-message').fadeOut(3000);
-    $('#bet-value').html('0.125');
-    $('#hall-type').html($('.hall-type-tab-button').eq(0).text().trim());
-    $('.hall-type-tab-button').eq(0).addClass('hall-tab-button-active');
-    //何人用のhallかを選択
-    $('.hall-type-tab-button').each(function () {
-        $(this).on('click', function () {
-            $('.hall-tab-value-button').removeClass('hall-tab-button-inactive');
-            $('.hall-type-tab-button').removeClass('hall-tab-button-active');
-            var index = $('.hall-type-tab-button').index(this);
-            hall_type_index = index
-            var text = $(this).text().trim();
-            $(this).addClass('hall-tab-button-active');
-            const c_address = contract_addresses[index];
-            //x2以外を選んだ時はbet valueをeq(3)に制限する
-            if(index !== 0){
-                $('.hall-tab-value-button').removeClass('hall-tab-button-active');
-                $('.hall-tab-value-button').addClass('hall-tab-button-inactive');
-                $('.hall-tab-value-button').eq(3).removeClass('hall-tab-button-inactive');
-                $('.hall-tab-value-button').eq(3).addClass('hall-tab-button-active');
-                $('#bet-value').html('1')
-            }
-            $('#hall-type').html(text);
-            $('#hall-qr').empty();
-            $('#hall-qr').qrcode({render: 'div', text: `ethereum:${c_address}?amount=${$('#bet-value').text().trim()}&gas=1000000`});
-            $('#contract-address-shown').html(c_address)
-        })
-    });
-    $('.hall-tab-value-button').eq(0).addClass('hall-tab-button-active');
-    $('.hall-tab-value-button').each(function () {
-        $(this).on('click', function () {
-            //x2以外が選択されている時は何もしない
-            var text = $(this).text().trim();
-            if($('.hall-tab-button-active').eq(0).text().trim() === 'x2'){
-                $('.hall-tab-value-button').removeClass('hall-tab-button-active');
-                $(this).addClass('hall-tab-button-active');
-                //x2の時だけbet valueは変更される
-                $('#bet-value').html(text);
-                //qr コードのamountも変更
-                $('#hall-qr').empty();
-                $('#hall-qr').qrcode({render: 'div', text: `ethereum:${contract_addresses[0]}?amount=${text.trim()}&gas=1000000`});
-            }
-        })
-    });
+
     //qr code 最初の表示
     $('#hall-qr').qrcode({render: 'div', text: `ethereum:${contract_addresses[0]}?amount=${$('#bet-value').text().trim()}&gas=1000000`});
     $('#contract-address-shown').html(contract_addresses[0]);
@@ -230,46 +178,47 @@ $(function(){
             window.contract_instance = contract.at(contract_addresses[0]);
         });
     });
-    $.ajax({
-        url: "/ethereum/ranking/send",
-        type: "POST"
-    });
-    setInterval(function () {
-        $.ajax({
-            url: "/ethereum/jp",
-            type: "POST",
-            data: { contract_address: contract_addresses[hall_type_index] }
-        }).done(function(data){
-            $('span#jp').html(data.jp)
-        })
-    }, 2500);
-    setInterval(function () {
-        $.ajax({
-            url: "/ethereum/event",
-            type: "POST"
-        }).done(function(data){
-            if(events.length !== data.logs.length) {
-
-                events = data.logs.reverse();
-                //current number of logs
-                const currentLogLength = $('.event-log-element').length;
-                $.each(events, function (index, elem) {
-                    window.web3.eth.getTransactionReceipt(elem.transactionHash, function(e, receit) {
-                        if(e){
-                            console.log(e);
-                            return ;
-                        }
-                        if(index + 1 > currentLogLength) {
-                            const decodeLogs = abiDecoder.decodeLogs(receit.logs);
-                            const winner = decodeLogs[0].events[0].value;
-                            const bet = decodeLogs[0].events[2].value;
-                            $('#event-logs').append('<p class="event-log-element">' + winner + ' ' + bet / (10 ** 18) + ' ETH' + '</p>')
-                        }
-                    })
-                });
-            }
-        })
-    }, 2500);
+    // $.ajax({
+    //     url: "/ethereum/ranking/send",
+    //     type: "POST"
+    // });
+    // setInterval(function () {
+    //     console.log("QR Code クソ野郎死んじまえ");
+    //     $.ajax({
+    //         url: "/ethereum/jp",
+    //         type: "POST",
+    //         data: { contract_address: contract_addresses[hall_type_index] }
+    //     }).done(function(data){
+    //         $('.eth').html(data.jp)
+    //     })
+    // }, 2500);
+    // setInterval(function () {
+    //     $.ajax({
+    //         url: "/ethereum/event",
+    //         type: "POST"
+    //     }).done(function(data){
+    //         if(events.length !== data.logs.length) {
+    //
+    //             events = data.logs.reverse();
+    //             //current number of logs
+    //             const currentLogLength = $('.event-log-element').length;
+    //             $.each(events, function (index, elem) {
+    //                 window.web3.eth.getTransactionReceipt(elem.transactionHash, function(e, receit) {
+    //                     if(e){
+    //                         console.log(e);
+    //                         return ;
+    //                     }
+    //                     if(index + 1 > currentLogLength) {
+    //                         const decodeLogs = abiDecoder.decodeLogs(receit.logs);
+    //                         const winner = decodeLogs[0].events[0].value;
+    //                         const bet = decodeLogs[0].events[2].value;
+    //                         $('#event-logs').append('<p class="event-log-element">' + winner + ' ' + bet / (10 ** 18) + ' ETH' + '</p>')
+    //                     }
+    //                 })
+    //             });
+    //         }
+    //     })
+    // }, 2500);
 
 
     // タブ関連
