@@ -1,0 +1,18 @@
+<div class="tabBody-5">
+  <div class="inner-5">
+    <div class="scroll-pane">
+      <% data.each_with_index do |obj, index| %>
+        <% case type %>
+        <% when "amount" %>
+          <%= render 'components/rank_amount', obj: obj, index: index %>
+        <% when "transaction" %>
+          <%= render 'components/rank_tx', obj: obj, index: index %>
+        <% when "balance" %>
+          <%= render 'components/rank_balance', obj: obj, index: index %>
+        <% else %>
+          <%= render 'components/rank_tx', obj: obj, index: index %>
+        <% end %>
+      <% end %>
+    </div>
+  </div><!-- /.inner -->
+</div><!-- /.tabBody -->

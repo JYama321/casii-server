@@ -1,396 +1,399 @@
-@import "bootstrap";
-
-.header-container{
-  width: 100%;
-  height: 60px;
-  position: relative;
-  background-color: #730E15;
-  ul{
-    width: 200px;
-    height: 100%;
-  }
-  li{
-    display: inline;
-    line-height: 60px;
-    width: 200px;
-    margin-left: 15px;
-    text-align: center;
-    color: white;
-  }
-  form{
-    width: 50%;
-    height: 100%;
-    display: inline;
-    position: absolute;
-    top: 5px;
-    left: 200px;
-  }
-}
-
-.jp-container{
-  width: 100%;
-  height: 400px;
-  background-color: rgba(160, 100, 100, 1);
-  position: relative;
-}
-
-.top-title{
-  width: 100%;
-  text-align: center;
-  line-height: 400px;
-  font-size: 32px;
-}
-
-.jp-bottom{
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%);
-  height: 150px;
-  width: 50%;
-}
-
-.jackpot{
-  position: absolute;
-  bottom: 80px;
-  font-size: 20px;
-}
-
-.jp-value{
-  position: absolute;
-  bottom: 7px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  -moz-transform: translateX(-50%);
-  -ms-transform: translateX(-50%);
-  -o-transform: translateX(-50%);
-  transform: translateX(-50%);
-  font-size: 30px;
-}
-
-//tab
-
-.tab-container{
-  width: 100%;
-  height: 750px;
-  display: flex;
-  background-color: #730E15;
-}
-
-.tab-container-base{
-  display: block;
-  margin: 20px auto;
-  width: calc(50% - 40px);
-  height: calc(100% - 40px);
-  background-color: rgba(160, 100, 100, 1);
-}
-
-.tab-header{
-  width: 100%;
-  height: 35px;
-  div{
-    width: calc(100% - 14px);
-    margin: 0 auto;
-    height:100%;
-    button {
-      display: inline;
-      float: left;
-      position: relative;
-      line-height: 35px;
-      font-size: 18px;
-      width: 120px;
-      height: 100%;
-      text-align: center;
-      color: white;
-      background-color: transparent;
-      border: none;
-      outline: none;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .button-active{
-      background-color: black;
-      border: 1px solid rgba(150,150,150,0.6);
-      color: #fff;
-    }
-  }
-}
-
-.tab-content{
-  width: calc(100% - 14px);
-  height: 673px;
-  margin: 0 7px;
-  background-color: rgba(30,30,30,0.7);
-  position: relative;
-}
-
-.tab-inner-content{
-  width: 100%;
-  height: 100%;
-  button.hall-tab-button-active{
-    background-color: white;
-  }
-  form{
-    label{
-      color: white;
-    }
-    input{
-      height: 25px;
-    }
-  }
-}
-
-.tab-inner-content-play{
-  width: 100%;
-  height: 100%;
-  button.hall-tab-button-active{
-    background-color: white;
-  }
-  button.hall-tab-button-inactive{
-    background-color: rgba(30,30,30,0.7);
-  }
-}
-
-#hall-number-of-players{
-  width: 100%;
-  height: 130px;
-  top: 20px;
-}
-
-#hall-value-of-bets{
-  width: 100%;
-  height: 150px;
-}
-
-#hall-qr-code{
-  width: 90%;
-  height: 370px;
-  margin: 0 auto;
-  display: flex;
-}
-
-.hall-tab{
-  width: 90%;
-  display: flex;
-  height: 35px;
-  margin: 0 auto;
-  button{
-    width: 20%;
-    outline: none;
-    border: none;
-    background-color: #730E15;
-    &:hover{
-      cursor: pointer;
-    }
-  }
-}
-
-.my-page-text-field{
-  width: 90%;
-  height: 100px;
-  margin: 0 auto;
-  text-align: center;
-  .header-address{
-    width: 230px;
-    height: 30px;
-    margin-top: 35px;
-  }
-  label{
-    color: white;
-    text-align: left;
-    margin-right: 15px;
-  }
-  .login-submit{
-    height: 28px;
-    width: 56px;
-    margin-left: 15px;
-  }
-}
-
-.my-page-content{
-  height: calc(100% - 100px);
-  width: 90%;
-  margin: 0 auto;
-  #my-page-logs{
-    height: 70%;
-    width: 100%;
-    overflow: scroll;
-    p {
-      font-size: 16px;
-      text-align: justify;
-      text-justify: inter-ideograph;
-      background-color: rgba(0,0,0,0.5);
-      margin: 7px auto;
-      width: 80%;
-      max-width: 320px;
-      height: 30px;
-      line-height: 30px;
-    }
-    p.my-event-red{
-      color: red;
-    }
-    p.my-event-blue{
-      color: blue;
-    }
-  }
-  #my-page-plus-minus{
-    height: 30%;
-    width: 100%;
-    top: 50px;
-    p {
-      font-size: 24px;
-      width: 100%;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-    }
-  }
-}
-
-.hall-text{
-  color: white;
-  height: 60px;
-  line-height: 30px;
-  width: 90%;
-  margin: 0 auto;
-}
-
-.contract-address-info{
-  width: 50%;
-  height: 150px;
-  p{
-    border-bottom: 1px solid #333333;
-    color: white;
-    width: 90%;
-    overflow: scroll;
-    margin: 0 auto;
-    line-height: 40px;
-    height: 40px
-  }
-}
-
-#event-logs{
-  width: 90%;
-  height: calc(100% - 30px);
-  margin: 0 auto;
-  overflow: scroll;
-  p{
-    margin-top: 7px;
-    color: white;
-    height: 30px;
-    font-size: 18px;
-    line-height: 30px;
-    border-bottom: 1px solid #000000;
-    width: 100%;
-    overflow-x: scroll;
-  }
-  span {
-    color: black;
-
-  }
-}
-
-#ranking{
-  width: 100%;
-  height: calc(100% - 35px);
-  #ranking-tabs{
-    width: 100%;
-    height: 35px;
-    padding-top: 5px;
-    .ranking-tab-button{
-      width: 32%;
-      height: 30px;
-      line-height: 30px;
-      font-size: 18px;
-      border: 1px solid rgba(255,255,255,0.5);
-      outline: none;
-      margin: 0;
-      padding: 0;
-      background-color: transparent;
-      cursor: pointer;
-    }
-    button.active{
-      background-color: white;
-    }
-  }
-  p{
-    height: 30px;
-    width: 100%;
-    text-align: center;
-    line-height: 30px;
-    color: white;
-    font-size: 20px;
-  }
-  div.ranking-contents {
-    width: 100%;
-    height: 100%;
-    div.ranking-duration-tab{
-      margin-top: 7px;
-    }
-  ul{
-      li{
-        display: flex;
-        p{
-          width: 20%;
-          height: 100%;
-          color: black;
-          font-size: 18px;
-        }
-        p.tx-address{
-          width: 50%;
-          height: 100%;
-          overflow-x: scroll;
-        }
-        p.tx-numbers{
-          width: 30%;
-          height: 100%;
-          text-align: center;
-          overflow-x: scroll;
-        }
-      }
-    }
-    div{
-      height: 32px;
-      width: 90%;
-      display: flex;
-      margin: 0 auto;
-      button{
-        width: 25%;
-        height: 30px;
-        background-color: #730E15;
-        color: black;
-        line-height: 30px;
-        text-align: center;
-        border: none;
-        cursor: pointer;
-      }
-      button.button-active-rank-bet{
-        background-color: white;
-      }
-      button.button-active-rank-transaction{
-        background-color: white;
-      }
-  }
-  }
-  ul{
-    width: 100%;
-    height: calc(100% - 65px);
-    margin: 0;
-    border: 0;
-    padding-top: 7px;
-    overflow: scroll;
-    li{
-      list-style: none;
-      width: 90%;
-      height: 35px;
-      margin: 7px auto;
-      text-align: center;
-      background-color: white;
-    }
-  }
-}
+//@import "bootstrap";
+//
+//.header-container{
+//  width: 100%;
+//  height: 60px;
+//  position: relative;
+//  background-color: #730E15;
+//  ul{
+//    width: 200px;
+//    height: 100%;
+//  }
+//  li{
+//    display: inline;
+//    line-height: 60px;
+//    width: 200px;
+//    margin-left: 15px;
+//    text-align: center;
+//    color: white;
+//  }
+//  form{
+//    width: 50%;
+//    height: 100%;
+//    display: inline;
+//    position: absolute;
+//    top: 5px;
+//    left: 200px;
+//  }
+//}
+//
+//.jp-container{
+//  width: 100%;
+//  height: 400px;
+//  background-color: rgba(160, 100, 100, 1);
+//  position: relative;
+//}
+//
+//.top-title{
+//  width: 100%;
+//  text-align: center;
+//  line-height: 400px;
+//  font-size: 32px;
+//}
+//
+//.jp-bottom{
+//  position: absolute;
+//  bottom: 0;
+//  left: 50%;
+//  -webkit-transform: translateX(-50%);
+//  -moz-transform: translateX(-50%);
+//  -ms-transform: translateX(-50%);
+//  -o-transform: translateX(-50%);
+//  transform: translateX(-50%);
+//  height: 150px;
+//  width: 50%;
+//}
+//
+//.jackpot{
+//  position: absolute;
+//  bottom: 80px;
+//  font-size: 20px;
+//}
+//
+//.jp-value{
+//  position: absolute;
+//  bottom: 7px;
+//  left: 50%;
+//  -webkit-transform: translateX(-50%);
+//  -moz-transform: translateX(-50%);
+//  -ms-transform: translateX(-50%);
+//  -o-transform: translateX(-50%);
+//  transform: translateX(-50%);
+//  font-size: 30px;
+//}
+//
+////tab
+//
+//.tab-container{
+//  width: 100%;
+//  height: 750px;
+//  display: flex;
+//  background-color: #730E15;
+//}
+//
+//.tab-container-base{
+//  display: block;
+//  margin: 20px auto;
+//  width: calc(50% - 40px);
+//  height: calc(100% - 40px);
+//  background-color: rgba(160, 100, 100, 1);
+//}
+//
+//.tab-header{
+//  width: 100%;
+//  height: 35px;
+//  div{
+//    width: calc(100% - 14px);
+//    margin: 0 auto;
+//    height:100%;
+//    button {
+//      display: inline;
+//      float: left;
+//      position: relative;
+//      line-height: 35px;
+//      font-size: 18px;
+//      width: 120px;
+//      height: 100%;
+//      text-align: center;
+//      color: white;
+//      background-color: transparent;
+//      border: none;
+//      outline: none;
+//      &:hover {
+//        cursor: pointer;
+//      }
+//    }
+//    .button-active{
+//      background-color: black;
+//      border: 1px solid rgba(150,150,150,0.6);
+//      color: #fff;
+//    }
+//  }
+//}
+//
+//.tab-content{
+//  width: calc(100% - 14px);
+//  height: 673px;
+//  margin: 0 7px;
+//  background-color: rgba(30,30,30,0.7);
+//  position: relative;
+//}
+//
+//.tab-inner-content{
+//  width: 100%;
+//  height: 100%;
+//  button.hall-tab-button-active{
+//    background-color: white;
+//  }
+//  form{
+//    label{
+//      color: white;
+//    }
+//    input{
+//      height: 25px;
+//    }
+//  }
+//}
+//
+//.tab-inner-content-play{
+//  width: 100%;
+//  height: 100%;
+//  button.hall-tab-button-active{
+//    background-color: white;
+//  }
+//  button.hall-tab-button-inactive{
+//    background-color: rgba(30,30,30,0.7);
+//  }
+//}
+//
+//#hall-number-of-players{
+//  width: 100%;
+//  height: 130px;
+//  top: 20px;
+//}
+//
+//#hall-value-of-bets{
+//  width: 100%;
+//  height: 150px;
+//}
+//
+//#hall-qr-code{
+//  width: 90%;
+//  height: 370px;
+//  margin: 0 auto;
+//  display: flex;
+//}
+//
+//.hall-tab{
+//  width: 90%;
+//  display: flex;
+//  height: 35px;
+//  margin: 0 auto;
+//  button{
+//    width: 20%;
+//    outline: none;
+//    border: none;
+//    background-color: #730E15;
+//    &:hover{
+//      cursor: pointer;
+//    }
+//  }
+//}
+//
+//.my-page-text-field{
+//  width: 90%;
+//  height: 100px;
+//  margin: 0 auto;
+//  text-align: center;
+//  .header-address{
+//    width: 230px;
+//    height: 30px;
+//    margin-top: 35px;
+//  }
+//  label{
+//    color: white;
+//    text-align: left;
+//    margin-right: 15px;
+//  }
+//  .login-submit{
+//    height: 28px;
+//    width: 56px;
+//    margin-left: 15px;
+//  }
+//}
+//
+//.my-page-content{
+//  height: calc(100% - 100px);
+//  width: 90%;
+//  margin: 0 auto;
+//  #my-page-logs{
+//    height: 70%;
+//    width: 100%;
+//    overflow: scroll;
+//    p {
+//      font-size: 16px;
+//      text-align: justify;
+//      text-justify: inter-ideograph;
+//      background-color: rgba(0,0,0,0.5);
+//      margin: 7px auto;
+//      width: 80%;
+//      max-width: 320px;
+//      height: 30px;
+//      line-height: 30px;
+//    }
+//    p.my-event-red{
+//      color: red;
+//    }
+//    p.my-event-blue{
+//      color: blue;
+//    }
+//  }
+//  #my-page-plus-minus{
+//    height: 30%;
+//    width: 100%;
+//    top: 50px;
+//    p {
+//      font-size: 24px;
+//      width: 100%;
+//      height: 30px;
+//      line-height: 30px;
+//      text-align: center;
+//    }
+//  }
+//}
+//
+//.hall-text{
+//  color: white;
+//  height: 60px;
+//  line-height: 30px;
+//  width: 90%;
+//  margin: 0 auto;
+//}
+//
+//.contract-address-info{
+//  width: 50%;
+//  height: 150px;
+//  p{
+//    border-bottom: 1px solid #333333;
+//    color: white;
+//    width: 90%;
+//    overflow: scroll;
+//    margin: 0 auto;
+//    line-height: 40px;
+//    height: 40px
+//  }
+//}
+//
+//#event-logs{
+//  width: 90%;
+//  height: calc(100% - 30px);
+//  margin: 0 auto;
+//  overflow: scroll;
+//  p{
+//    margin-top: 7px;
+//    color: white;
+//    height: 30px;
+//    font-size: 18px;
+//    line-height: 30px;
+//    border-bottom: 1px solid #000000;
+//    width: 100%;
+//    overflow-x: scroll;
+//  }
+//  span {
+//    color: black;
+//
+//  }
+//}
+//
+//#ranking{
+//  width: 100%;
+//  height: calc(100% - 35px);
+//  #ranking-tabs{
+//    width: 100%;
+//    height: 35px;
+//    padding-top: 5px;
+//    .ranking-tab-button{
+//      width: 32%;
+//      height: 30px;
+//      line-height: 30px;
+//      font-size: 18px;
+//      border: 1px solid rgba(255,255,255,0.5);
+//      outline: none;
+//      margin: 0;
+//      padding: 0;
+//      background-color: transparent;
+//      cursor: pointer;
+//    }
+//    button.active{
+//      background-color: white;
+//    }
+//  }
+//  p{
+//    height: 30px;
+//    width: 100%;
+//    text-align: center;
+//    line-height: 30px;
+//    color: white;
+//    font-size: 20px;
+//  }
+//  div.ranking-contents {
+//    width: 100%;
+//    height: 100%;
+//    div.ranking-duration-tab{
+//      margin-top: 7px;
+//    }
+//  ul{
+//      li{
+//        display: flex;
+//        p{
+//          width: 20%;
+//          height: 100%;
+//          color: black;
+//          font-size: 18px;
+//        }
+//        p.tx-address{
+//          width: 50%;
+//          height: 100%;
+//          overflow-x: scroll;
+//        }
+//        p.tx-numbers{
+//          width: 30%;
+//          height: 100%;
+//          text-align: center;
+//          overflow-x: scroll;
+//        }
+//      }
+//    }
+//    div{
+//      height: 32px;
+//      width: 90%;
+//      display: flex;
+//      margin: 0 auto;
+//      button{
+//        width: 25%;
+//        height: 30px;
+//        background-color: #730E15;
+//        color: black;
+//        line-height: 30px;
+//        text-align: center;
+//        border: none;
+//        cursor: pointer;
+//      }
+//      button.button-active-rank-bet{
+//        background-color: white;
+//      }
+//      button.button-active-rank-transaction{
+//        background-color: white;
+//      }
+//  }
+//  }
+//  ul{
+//    width: 100%;
+//    height: calc(100% - 65px);
+//    margin: 0;
+//    border: 0;
+//    padding-top: 7px;
+//    overflow: scroll;
+//    li{
+//      list-style: none;
+//      width: 90%;
+//      height: 35px;
+//      margin: 7px auto;
+//      text-align: center;
+//      background-color: white;
+//    }
+//  }
+//}
+//
+//
+//

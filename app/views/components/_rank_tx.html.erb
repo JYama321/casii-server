@@ -1,0 +1,20 @@
+<% if index < 3  %>
+  <UL class=<%= "rank#{index+1}"%>>
+    <li>
+      <%= image_tag("rank/rank#{index+1}.png", :alt => "rank #{index+1}", :width => "100%;" ) %>
+    </li>
+    <li class='<%= "rank#{index+1}_bg"%>'>
+      <div class='<%= "rank#{index+1}_txt BS3-#{index+1}_list1" %>'>
+        <%= obj[0] %>
+      </div>
+      <div class='<%=  "BS3-#{index+1}_list2" %>'>
+        <%= obj[1] %>  Transactions
+      </div>
+    </li>
+  </ul>
+<% else %>
+  <UL class="rank"><li>4</li>
+    <li><div class="BS3-4_list1"><%= obj[0] %>></div></li>
+    <li><div class="BS3-4_list2"><%= obj[1] %> Transactions</div></li>
+  </ul>
+<% end %>

@@ -3,28 +3,36 @@ class EthereumController < ApplicationController
   require 'jsonclient'
   include Common
 
-  def index
+  def initialize
+    @jp = 0.00
     @url=ENV["INFURA_ENDPOINT_RINKEBY"]
     @user = User.new
     @client = JSONClient.new
-    #total bet rank
-    @send_total_rank = Transaction.joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
-    @monthly_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
-    @weekly_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
-    @daily_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').sum(:t_send)
-    # total number of transactions ranking
-    @daily_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
-    @weekly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
-    @monthly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, +1).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').count
-    @total_number_of_bets = Transaction.joins(:user).group("users.address").order('count_all desc').count
-    # total balance
-    @daily_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
-    @weekly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, Time.now.day - Time.now.wday).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
-    @monthly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
-    @total_balance_rank = Transaction.joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc")
-
-    @jp = 0.00
   end
+
+  def index
+    #total bet rank
+    week_day = (Time.now.day - Time.now.wday) == 0 ? + 1 : (Time.now.day - Time.now.wday)
+    @total_send_rank = Transaction.joins(:user).group("users.address").order('sum_t_send desc').limit(4).sum(:t_send)
+    @monthly_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').limit(4).sum(:t_send)
+    @weekly_send_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, week_day ).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').limit(4).sum(:t_send)
+    @daily_send_rank = Transaction.where("t_time >= #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('sum_t_send desc').limit(4).sum(:t_send)
+
+    # total number of transactions ranking
+    @daily_total_number_of_bets = Transaction.where("t_time >= #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').limit(4).count
+    @weekly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, week_day).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').limit(4).count
+    @monthly_total_number_of_bets = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, +1).to_time.to_i}").joins(:user).group("users.address").order('count_all desc').limit(4).count
+    @total_number_of_bets = Transaction.joins(:user).group("users.address").order('count_all desc').limit(4).count
+
+    # total balance
+    @daily_balance_rank = Transaction.where("t_time >= #{Date.new(Time.now.year, Time.now.month, Time.now.day).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
+    @weekly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, week_day).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
+    @monthly_balance_rank = Transaction.where("t_time > #{Date.new(Time.now.year, Time.now.month, + 1).to_time.to_i}").joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
+    @total_balance_rank = Transaction.joins(:user).select("sum(t_get - t_send) as balance,address").group("users.address").order("balance desc").limit(4)
+
+    render layout: 'application'
+  end
+
 
   def jackpot_ajax
     parameters = {

@@ -1,254 +1,367 @@
-<div class="jp-container">
-  <%= render 'shared/flash_message' %>
-  <h1 class="top-title">Smart Contract Casino</h1>
-  <div class="jp-bottom">
-    <p class="jackpot">Jackpot</p>
-    <h3 class="jp-value"><span id="jp"><%= @jp %></span>ETH</h3>
+<div id="wrapper">
+  <div id="header">
+    <ul class="header">
+      <li class="L"><h1><%= image_tag("common/logo.png", :alt => "logo") %></h1></li>
+      <li class="R">
+        <ul class="h_inn">
+          <li><%= image_tag("header/rate.png", :alt => "rate") %></li><li class="val">
+          250</li><li>
+          <%= image_tag("header/uds-eth.png", :alt => "USD/ETH") %></li><li>
+          <%= image_tag("header/mark.png", :alt => "・") %></li><li>
+          <%= image_tag("header/last-tx.png", :alt => "Last one hour Tx") %></li><li class="val">
+          15</li><li>
+          <%= image_tag("header/mark.png", :alt => "・") %>
+        </li><li>
+          <ul class="lang">
+            <li class="lang__single">
+              <a href="#"><%= image_tag("header/lang.png", :alt => "Language") %></a>
+              <ul class="lang__second-level">
+                <li><a href="#">English</a></li>
+                <li><a href="#">Chinese</a></li>
+              </ul>
+            </li>
+          </ul></li>
+        </ul>
+      </li>
+    </ul>
   </div>
-</div>
-<div class="tab-container">
-  <div class="tab-container-base">
-    <div class="tab-header">
-      <div>
-        <button class="tab-button-play">
-          Play
-        </button>
-        <button class="tab-button-play">
-          How to play
-        </button>
-      </div>
-    </div>
-    <div class="tab-content">
-      <div class="tab-inner-content-play">
-        <div id="hall-number-of-players">
-          <p class="hall-text">Halls</p>
-          <div class="hall-tab">
-            <button class="hall-type-tab-button">
-              x2
-            </button>
-            <button class="hall-type-tab-button">
-              x3
-            </button>
-            <button class="hall-type-tab-button">
-              x6
-            </button>
-            <button class="hall-type-tab-button">
-              x10
-            </button>
-            <button class="hall-type-tab-button">
-              x???
-            </button>
-          </div>
-        </div>
-        <div id="hall-value-of-bets">
-          <p class="hall-text">The probability that you get jackpot is proportion to value of ETH you bet.</p>
-          <div class="hall-tab">
-            <button class="hall-tab-value-button hall-tab-button-active">
-              0.125
-            </button>
-            <button class="hall-tab-value-button">
-              0.25
-            </button>
-            <button class="hall-tab-value-button">
-              0.50
-            </button>
-            <button class="hall-tab-value-button">
-              1
-            </button>
-            <button class="hall-tab-value-button">
-              2
-            </button>
-            <button class="hall-tab-value-button">
-              4
-            </button>
-            <button class="hall-tab-value-button">
-              8
-            </button>
-            <button class="hall-tab-value-button">
-              16
-            </button>
-            <button class="hall-tab-value-button">
-              32
-            </button>
-            <button class="hall-tab-value-button">
-              64
-            </button>
-          </div>
-        </div>
-        <div id="hall-qr-code">
-          <div id="hall-qr">
-          </div>
-          <div class="contract-address-info">
-            <p id="contract-address-shown">0x9cb4f5fb9bc5f3a3918c1d90c9f0236406d6c106</p>
-            <p>Hall type: <span id="hall-type"></span></p>
-            <p>Bet Value: <span id="bet-value"></span> ETH</p>
-          </div>
-        </div>
-      </div>
-      <div class="tab-inner-content-play">
-        遊び方
-      </div>
-    </div>
-  </div>
-    <div class="tab-container-base">
-      <div class="tab-header">
-        <div>
-          <button class="tab-button-user">
-            My Page
-          </button>
-          <button class="tab-button-user">
-            Ranking
-          </button>
-          <button class="tab-button-user">
-            History
-          </button>
-        </div>
-      </div>
-      <div class="tab-content">
-        <div class="tab-inner-content">
-          <div class="my-page-text-field">
-          <form name="myinfo">
-            <label for="myaddress">Address</label>
-            <input id="myaddress" type="text">
-            <input type="button" value="get info" id="address-submit-button">
-          </form>
-          </div>
-          <div class="my-page-content">
-            <div id="my-page-plus-minus">
-              <p></p>
-            </div>
-            <div id="my-page-logs">
 
-            </div>
-          </div>
-        </div>
-        <div class="tab-inner-content">
-          <div id="ranking">
-            <div id="ranking-tabs">
-              <button class="ranking-tab-button">
-                amount of Bet
-              </button>
-              <button class="ranking-tab-button">
-                transactions
-              </button>
-              <button class="ranking-tab-button">
-                balances
-              </button>
-            </div>
-            <div class="ranking-contents">
-              <div class="ranking-duration-tab" >
-                <button class="total-bet-ranking">
-                  Daily
-                </button>
-                <button class="total-bet-ranking">
-                  Weekly
-                </button>
-                <button class="total-bet-ranking">
-                  Monthly
-                </button>
-                <button class="total-bet-ranking">
-                  Total
-                </button>
+  <div class="main_wrap">
+
+    <div class="catch"><%= image_tag("catch/c01.png", :width => "100%", :alt => "No bet No gain") %></div>
+    <div class="jackpot">
+      <%= image_tag("jackpot/jp_ttl.png", :width => "223", :alt => "Jackpot") %>
+      <ul>
+        <li><%= image_tag("jackpot/coin10.png", :width => "155", :alt => "coin") %></li>
+        <li class="eth"><%= @jp %></li>
+        <li><%= image_tag("jackpot/ethLOGO.png", :width => "100", :alt => "RTH LOGO") %></li>
+      </ul>
+    </div><!--jackpot-->
+
+    <div class="main">
+      <dl class="main-menu"><dd>
+
+
+        <!---▼▼▼ 左-->
+        <div class="wrap-1">
+
+          <!---Play START-->
+          <h2 class="tab-head-1 active-1"><%= image_tag("tab/tab_play.png", :width => "200", :alt => "play") %></h2>
+          <div class="tabBody-1">
+            <div class="inner">
+              <form action="XXXXX" method="post">
+                <p>Halls</p>
+                <div class="play_btn">
+                  <input id="btn1-item1" type="radio" name="btn1" value="XX" onclick="playBTN1_1();" checked>
+                  <label class="play_btn_item btn1" for="btn1-item1">X2</label>
+                  <input id="btn1-item2" type="radio" name="btn1" value="XX" onclick="playBTN1_2();">
+                  <label class="play_btn_item btn1" for="btn1-item2">X3</label>
+                  <input id="btn1-item3" type="radio" name="btn1" value="XX" onclick="playBTN1_3();">
+                  <label class="play_btn_item btn1" for="btn1-item3">X6</label>
+                  <input id="btn1-item4" type="radio" name="btn1" value="XX" onclick="playBTN1_4();">
+                  <label class="play_btn_item btn1 last" for="btn1-item4">X10</label>
+                </div>
+                <p>The probability that you get jackpot is<br>
+                  proportion to value of ETH you bet.</p>
+                <div class="play_btn">
+                  <input id="btn2-item1" type="radio" name="btn2" value="XX" onclick="playBTN2_1();" checked>
+                  <label class="play_btn_item btn2" for="btn2-item1">0.125</label>
+                  <input id="btn2-item2" type="radio" name="btn2" value="XX" onclick="playBTN2_2();">
+                  <label class="play_btn_item btn2" for="btn2-item2">0.25</label>
+                  <input id="btn2-item3" type="radio" name="btn2" value="XX" onclick="playBTN2_3();">
+                  <label class="play_btn_item btn2" for="btn2-item3">0.50</label>
+                  <input id="btn2-item4" type="radio" name="btn2" value="XX" onclick="playBTN2_4();">
+                  <label class="play_btn_item btn2" for="btn2-item4">1</label>
+                  <input id="btn2-item5" type="radio" name="btn2" value="XX" onclick="playBTN2_5();">
+                  <label class="play_btn_item btn2 last" for="btn2-item5">2</label>
+                  <input id="btn2-item6" type="radio" name="btn2" value="XX" onclick="playBTN2_6();">
+                  <label class="play_btn_item btn2" for="btn2-item6">4</label>
+                  <input id="btn2-item7" type="radio" name="btn2" value="XX" onclick="playBTN2_7();">
+                  <label class="play_btn_item btn2" for="btn2-item7">8</label>
+                  <input id="btn2-item8" type="radio" name="btn2" value="XX" onclick="playBTN2_8();">
+                  <label class="play_btn_item btn2" for="btn2-item8">16</label>
+                  <input id="btn2-item9" type="radio" name="btn2" value="XX" onclick="playBTN2_9();">
+                  <label class="play_btn_item btn2" for="btn2-item9">32</label>
+                  <input id="btn2-item10" type="radio" name="btn2" value="XX" onclick="playBTN2_10();">
+                  <label class="play_btn_item btn2 last" for="btn2-item10">64</label>
+                </div>
+                <dl class="play_bottom">
+                  <dd><%= image_tag("play/qr.png", :width => "150", :alt => "QR") %></dd>
+                  <dd>
+                    <div class="container">
+                      <div class="scroll-pane horizontal-only">
+                        <p>
+                          0x9cb4f5fb9bc5f3a3918c1d90c9f0
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="container">
+                      <div id="pbtn1">Hall type: x2</div>
+                    </div>
+
+                    <div class="container">
+                      <div id="pbtn2">Bet Value: 0.125 </div>
+                    </div>
+                  </dd>
+                </dl>
+
+              </form>
+            </div><!-- /.inner -->
+          </div><!-- /.tabBody -->
+
+          <!---How to START-->
+          <h2 class="tab-head-1"><%= image_tag("tab/tab_howto.png", :width => "200", :alt => "How to Play") %></h2>
+          <div class="tabBody-1">
+            <div class="howto">
+              <div class="container">
+                <div class="scroll-pane">
+                  <div class="howto-inn">
+                    <h3 class="top">Step 1</h3>
+                    <p>Choose the group that how many people play.</p>
+                    <%= image_tag("howto/howto1.png", :width => "470", :alt => "image") %>
+                    <p class="pb30">Choose the number of players in the halls .</p>
+                    <h3>Step 2</h3>
+                    <p>Choose the value you bet.</p>
+                    <%= image_tag("howto/howto2.png", :width => "470", :alt => "image") %>
+                    <p class="pb30">In smart contract casino,you can wager the bets from 0.125ETH to 64ETH.<br>
+                      Choose the value you want to bet.</p>
+                    <h3>Step 3</h3>
+                    <p>Send the bets(ETH) you choose.</p>
+                    <%= image_tag("howto/howto3.png", :width => "470", :alt => "image") %>
+                    <p class="pb30">Scan the QR code from your wallet or copy the ETH address on the screen and paste on your sending screen of the wallet.</p>
+                    <h3>Step 4</h3>
+                    <p>Wait for game matchmaking</p>
+                    <%= image_tag("howto/howto4.png", :width => "470", :alt => "image") %>
+                    <p>After the sending, there will display 「waiting for other user …」 on the middle of the screen.
+                      The game will start when matchmaking is done.The winner of the game will get ETH depends on the number of players or the bets wagered.<br>
+                      Confirm the transaction in Mypage.<br>
+                      「Welcome to the most fair casino」After the sending, there will display 「waiting for other user …」 on the middle of the screen.</p>
+                  </div>
+
+                </div>
               </div>
-              <ul class="tab-inner-content-bet-rank">
-                <% @daily_send_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-bet-rank">
-                <% @weekly_send_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-bet-rank">
-                <% @monthly_send_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-bet-rank">
-                <% @send_total_rank.each_with_index do |obj, index| %>
-                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="ranking-contents">
-              <div class="ranking-duration-tab" >
-                <button class="total-transaction-ranking">
-                  Daily
-                </button>
-                <button class="total-transaction-ranking">
-                  Weekly
-                </button>
-                <button class="total-transaction-ranking">
-                  Monthly
-                </button>
-                <button class="total-transaction-ranking">
-                  Total
-                </button>
+
+            </div><!-- /.howto -->
+          </div><!-- /.tabBody -->
+
+        </div><!-- /.wrap -->
+        <!--左 ▲▲▲ -->
+      </dd><dd>
+
+        <!-- ▼▼▼ 右 -->
+
+        <div class="wrap-2">
+          <!---My page START-->
+          <h2 class="tab-head-2 active-2"><%= image_tag("tab/tab_myp.png", :width => "165", :alt => "My Page") %></h2>
+          <div class="tabBody-2">
+            <div class="inner-2">
+              <div class="myp_add"><p>Your address</p>
+                <form action="XXXXX" method="post">
+                  <dl>
+                    <dd><input type="text" name="" value="0xd7860c2Bb8b2fDad44d4Db5c9ec2620926eC42f9" class="login_af"></dd>
+                    <dd><input type="submit" name="" value="edit"></dd>
+                  </dl>
+                </form>
               </div>
-              <ul class="tab-inner-content-transaction-rank">
-                <%  @daily_total_number_of_bets.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-transaction-rank">
-                <%  @weekly_total_number_of_bets.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-transaction-rank">
-                <%  @monthly_total_number_of_bets.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-transaction-rank">
-                <%  @total_number_of_bets.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
-                <% end %>
-              </ul>
-            </div>
-            <div class="ranking-contents">
-              <div class="ranking-duration-tab" >
-                <button class="total-balance-ranking">
-                  Daily
-                </button>
-                <button class="total-balance-ranking">
-                  Weekly
-                </button>
-                <button class="total-balance-ranking">
-                  Monthly
-                </button>
-                <button class="total-balance-ranking">
-                  Total
-                </button>
-              </div>
-              <ul class="tab-inner-content-balance-rank">
-                <%  @daily_balance_rank.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p>  </span><p class="tx-address"><%= obj.address %> </p>: <%= Float(obj.balance).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-balance-rank">
-                <%  @weekly_balance_rank.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p> <p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-balance-rank">
-                <%  @monthly_balance_rank.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-              <ul class="tab-inner-content-balance-rank">
-                <%  @total_balance_rank.each_with_index do |obj, index| %>
-                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="tab-inner-content">
-          <div id="event-logs">
-          </div>
-        </div>
-      </div>
+
+              <!-- ▼▼▼ 中 -->
+              <div class="wrap-3">
+
+                <!---My page ALL START-->
+                <h2 class="tab-head-3 active-3">ALL</h2>
+                <div class="tabBody-3">
+                  <div class="inner-3">
+                    <dl class="myp_total"><dd>total</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>Age</dd><dd>Value</dd></dl>
+
+                    <div class="myp_list"><div class="scroll-pane">
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+
+                    </div></div>
+                  </div><!-- /.inner -->
+                </div><!-- /.tabBody -->
+
+                <!---My page Receive ETH START-->
+                <h2 class="tab-head-3">Receive ETH</h2>
+                <div class="tabBody-3">
+                  <div class="inner-3">
+                    <dl class="myp_total"><dd>total</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>Age</dd><dd>Value</dd></dl>
+
+                    <div class="myp_list"><div class="scroll-pane">
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+                    </div></div>
+
+                  </div><!-- /.inner -->
+                </div><!-- /.tabBody -->
+
+
+                <!---My page Send ETH START-->
+                <h2 class="tab-head-3">Send ETH</h2>
+                <div class="tabBody-3">
+                  <div class="inner-3">
+                    <dl class="myp_total"><dd>total</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>Age</dd><dd>Value</dd></dl>
+
+                    <div class="myp_list"><div class="scroll-pane">
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
+                        <li><div class="BS_list3">2ETH</div></li>
+                      </ul>
+
+
+
+                    </div></div>
+
+                  </div><!-- /.inner -->
+                </div><!-- /.tabBody -->
+              </div><!-- /.wrap -->
+              <!-- 中 ▲▲▲ -->
+
+            </div><!-- /.inner -->
+          </div><!-- /.tabBody -->
+
+
+          <!---Ranking START-->
+          <h2 class="tab-head-2"><%= image_tag("tab/tab_rank.png", :alt => "Ranking", :width => "165") %></h2>
+          <div class="tabBody-2">
+            <div class="inner-2">
+
+              <!-- ▼▼▼ 中  -->
+              <div class="wrap-4">
+
+                <!---Ranking amount START-->
+                <h2 class="tab-head-4 active-4">amount of Bet</h2>
+                <div class="tabBody-4">
+                  <div class="inner-4">
+                    <!-- ▼▼▼ 中の中 -->
+                    <div class="wrap-5">
+                      <!---Ranking amount　Daily START-->
+                      <h2 class="tab-head-5 active-5">Daily</h2>
+                      <%= render 'components/ranking', data: @daily_send_rank, type: "amount" %>
+                      <!---Ranking amount　Weekly START-->
+                      <h2 class="tab-head-5">Weekly</h2>
+                      <%= render 'components/ranking', data: @weekly_send_rank, type: "amount" %>
+                      <!--Ranking amount Monthly　START-->
+                      <h2 class="tab-head-5">Monthly</h2>
+                      <%= render 'components/ranking', data: @monthly_send_rank, type: "amount" %>
+                      <!--Ranking amount　Total START-->
+                      <h2 class="tab-head-5">Total</h2>
+                      <%= render 'components/ranking', data: @total_send_rank, type: "amount" %>
+                    </div><!-- /.wrap -->
+                    <!-- 中の中 ▲▲▲-->
+                  </div><!-- /.inner -->
+                </div><!-- /.tabBody -->
+
+                <!---Ranking transaction START-->
+                <h2 class="tab-head-4">transaction</h2>
+                <div class="tabBody-4">
+                  <div class="inner-4">
+
+                    <!-- ▼▼▼ 中の中-->
+                    <div class="wrap-5">
+
+                      <!---Ranking transaction　Daily START-->
+                      <h2 class="tab-head-5 active-5">Daily</h2>
+                      <%= render 'components/ranking', data: @daily_total_number_of_bets, type: "transaction" %>
+
+                      <!---Ranking transaction　Weekly START-->
+                      <h2 class="tab-head-5">Weekly</h2>
+                      <%= render 'components/ranking', data: @weekly_total_number_of_bets, type: "transaction" %>
+
+                      <!--Ranking transaction Monthly　START-->
+                      <h2 class="tab-head-5">Monthly</h2>
+                      <%= render 'components/ranking', data: @monthly_total_number_of_bets, type: "transaction" %>
+
+                      <!--Ranking transaction　Total START-->
+                      <h2 class="tab-head-5">Total</h2>
+                      <%= render 'components/ranking', data: @total_number_of_bets, type: "transaction" %>
+                    </div><!-- /.wrap -->
+                    <!-- 中の中 ▲▲▲-->
+                  </div><!-- /.inner -->
+                </div><!-- /.tabBody -->
+
+
+                <!--Ranking balances START-->
+                <h2 class="tab-head-4">balances</h2>
+                <div class="tabBody-4">
+                  <div class="inner-4">
+                    <!-- ▼▼▼ 中の中 -->
+                    <div class="wrap-5">
+                      <!---Ranking balances　Daily START-->
+                      <h2 class="tab-head-5 active-5">Daily</h2>
+                      <%= render 'components/ranking', data: @daily_balance_rank, type: "balance" %>
+
+                      <!---Ranking balances　Weekly START-->
+                      <h2 class="tab-head-5">Weekly</h2>
+                      <%= render 'components/ranking', data: @weekly_balance_rank, type: "balance" %>
+
+                      <!--Ranking balances Monthly　START-->
+                      <h2 class="tab-head-5">Monthly</h2>
+                      <%= render 'components/ranking', data: @monthly_balance_rank, type: "balance" %>
+
+                      <!--Ranking balances　Total START-->
+                      <h2 class="tab-head-5">Total</h2>
+                      <%= render 'components/ranking', data: @total_balance_rank, type: "balance" %>
+                    </div><!-- /.wrap -->
+                    <!-- 中の中 ▲▲▲ -->
+                  </div><!-- /.inner -->
+                </div><!-- /.tabBody -->
+              </div><!-- /.wrap -->
+              <!-- 中 ▲▲▲ -->
+
+            </div><!-- /.inner -->
+          </div><!-- /.tabBody -->
+
+
+          <!---History START-->
+          <h2 class="tab-head-2"><%= image_tag("tab/tab_his.png", :width => "165", :alt => "History") %></h2>
+          <div class="tabBody-2">
+            <div class="inner-2">
+              <dl class="his_total"><dd>total TX</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>From</dd><dd>Value</dd></dl>
+
+              <div class="his_list"><div class="scroll-pane">
+                <UL><li><div class="BS2_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                  <li><div class="BS2_list2">0x494d5c0a7f29bb8cb4c11347f</div></li>
+                  <li><div class="BS2_list3">1.95ETH</div></li>
+                </ul>
+                <UL><li><div class="BS2_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                  <li><div class="BS2_list2">0x494d5c0a7f29bb8cb4c11347f</div></li>
+                  <li><div class="BS2_list3">1.95ETH</div></li>
+                </ul>
+
+
+              </div></div>
+            </div><!-- /.inner -->
+          </div><!-- /.tabBody -->
+        </div><!-- /.wrap -->
+        <!-- 右 ▲▲▲ -->
+      </dd>
+      </dl>
     </div>
-</div>
+  </div>
+</div><!--main_wrap-->

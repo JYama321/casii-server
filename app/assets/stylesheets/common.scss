@@ -1,0 +1,143 @@
+@charset "UTF-8";
+html{
+  height: 100%;
+  margin: 0;
+}
+@media screen and (min-width:641px) {
+  body {
+    height: 100%;
+    background-color :#000;
+    margin: 0 auto;
+    padding: 0;
+    font: 14px/1.131 "MS Gothic", "Osaka", Arial, sans-serif;
+    color: #fdfaf0;
+    line-height: 1.8;
+    -webkit-text-size-adjust: 100%;
+    background-image: image-url("common/bg.png");
+    background-repeat:no-repeat;
+    background-size: 100%;
+    background-attachment: fixed;
+  }
+}
+@media screen and (max-width:640px) {
+  body {
+    height: 100%;
+    background-color :#000;
+    margin: 0 auto;
+    padding: 0;
+    font: 14px/1.131 "MS Gothic", "Osaka", Arial, sans-serif;
+    color: #fdfaf0;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+p {
+  padding: 0;
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+dl {
+  margin: 0;
+  padding: 0;
+}
+
+dt {
+  margin: 0;
+  padding: 0;
+}
+
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+.pb30{padding-bottom:30px;}
+
+/*Form スタイルを全て消す*/
+input[type="radio"] {
+  display: none;
+}
+
+input, button, textarea, select {
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* hover */
+.hover {
+  opacity: 1;
+  transition-property: opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
+  -ms-filter: "alpha( opacity=100 )";
+  filter: alpha(opacity=100);
+}
+
+.hover:hover {
+  opacity: 0.7;
+  -ms-filter: "alpha( opacity=70 )";
+  filter: alpha(opacity=70);
+}
+
+
+/* IE8対策 */
+.hover * {
+  filter: alpha(opacity=100)\9; /* IE10以下 */
+}
+.hover:hover * {
+  filter: alpha(opacity=70)\9;
+}
+.hover:hover *:not(:target) {
+  filter: alpha(opacity=100)\9; /* IE9, 10 */
+}
+
+
+/* clearfix */
+.cf:before, .cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.cf {
+  *zoom: 1;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}

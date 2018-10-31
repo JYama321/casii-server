@@ -1,0 +1,254 @@
+<div class="jp-container">
+  <%= render 'shared/flash_message' %>
+  <h1 class="top-title">Smart Contract Casino</h1>
+  <div class="jp-bottom">
+    <p class="jackpot">Jackpot</p>
+    <h3 class="jp-value"><span id="jp"><%= @jp %></span>ETH</h3>
+  </div>
+</div>
+<div class="tab-container">
+  <div class="tab-container-base">
+    <div class="tab-header">
+      <div>
+        <button class="tab-button-play">
+          Play
+        </button>
+        <button class="tab-button-play">
+          How to play
+        </button>
+      </div>
+    </div>
+    <div class="tab-content">
+      <div class="tab-inner-content-play">
+        <div id="hall-number-of-players">
+          <p class="hall-text">Halls</p>
+          <div class="hall-tab">
+            <button class="hall-type-tab-button">
+              x2
+            </button>
+            <button class="hall-type-tab-button">
+              x3
+            </button>
+            <button class="hall-type-tab-button">
+              x6
+            </button>
+            <button class="hall-type-tab-button">
+              x10
+            </button>
+            <button class="hall-type-tab-button">
+              x???
+            </button>
+          </div>
+        </div>
+        <div id="hall-value-of-bets">
+          <p class="hall-text">The probability that you get jackpot is proportion to value of ETH you bet.</p>
+          <div class="hall-tab">
+            <button class="hall-tab-value-button hall-tab-button-active">
+              0.125
+            </button>
+            <button class="hall-tab-value-button">
+              0.25
+            </button>
+            <button class="hall-tab-value-button">
+              0.50
+            </button>
+            <button class="hall-tab-value-button">
+              1
+            </button>
+            <button class="hall-tab-value-button">
+              2
+            </button>
+            <button class="hall-tab-value-button">
+              4
+            </button>
+            <button class="hall-tab-value-button">
+              8
+            </button>
+            <button class="hall-tab-value-button">
+              16
+            </button>
+            <button class="hall-tab-value-button">
+              32
+            </button>
+            <button class="hall-tab-value-button">
+              64
+            </button>
+          </div>
+        </div>
+        <div id="hall-qr-code">
+          <div id="hall-qr">
+          </div>
+          <div class="contract-address-info">
+            <p id="contract-address-shown">0x9cb4f5fb9bc5f3a3918c1d90c9f0236406d6c106</p>
+            <p>Hall type: <span id="hall-type"></span></p>
+            <p>Bet Value: <span id="bet-value"></span> ETH</p>
+          </div>
+        </div>
+      </div>
+      <div class="tab-inner-content-play">
+        遊び方
+      </div>
+    </div>
+  </div>
+    <div class="tab-container-base">
+      <div class="tab-header">
+        <div>
+          <button class="tab-button-user">
+            My Page
+          </button>
+          <button class="tab-button-user">
+            Ranking
+          </button>
+          <button class="tab-button-user">
+            History
+          </button>
+        </div>
+      </div>
+      <div class="tab-content">
+        <div class="tab-inner-content">
+          <div class="my-page-text-field">
+          <form name="myinfo">
+            <label for="myaddress">Address</label>
+            <input id="myaddress" type="text">
+            <input type="button" value="get info" id="address-submit-button">
+          </form>
+          </div>
+          <div class="my-page-content">
+            <div id="my-page-plus-minus">
+              <p></p>
+            </div>
+            <div id="my-page-logs">
+
+            </div>
+          </div>
+        </div>
+        <div class="tab-inner-content">
+          <div id="ranking">
+            <div id="ranking-tabs">
+              <button class="ranking-tab-button">
+                amount of Bet
+              </button>
+              <button class="ranking-tab-button">
+                transactions
+              </button>
+              <button class="ranking-tab-button">
+                balances
+              </button>
+            </div>
+            <div class="ranking-contents">
+              <div class="ranking-duration-tab" >
+                <button class="total-bet-ranking">
+                  Daily
+                </button>
+                <button class="total-bet-ranking">
+                  Weekly
+                </button>
+                <button class="total-bet-ranking">
+                  Monthly
+                </button>
+                <button class="total-bet-ranking">
+                  Total
+                </button>
+              </div>
+              <ul class="tab-inner-content-bet-rank">
+                <% @daily_send_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-bet-rank">
+                <% @weekly_send_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-bet-rank">
+                <% @monthly_send_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-bet-rank">
+                <% @send_total_rank.each_with_index do |obj, index| %>
+                  <li><span><%= index+1 %>: </span><%= obj[0] %>: <%= Float(obj[1]).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="ranking-contents">
+              <div class="ranking-duration-tab" >
+                <button class="total-transaction-ranking">
+                  Daily
+                </button>
+                <button class="total-transaction-ranking">
+                  Weekly
+                </button>
+                <button class="total-transaction-ranking">
+                  Monthly
+                </button>
+                <button class="total-transaction-ranking">
+                  Total
+                </button>
+              </div>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @daily_total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @weekly_total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @monthly_total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-transaction-rank">
+                <%  @total_number_of_bets.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj[0] %></p> : <p class="tx-numbers"><%= obj[1] %> transactions</p></li>
+                <% end %>
+              </ul>
+            </div>
+            <div class="ranking-contents">
+              <div class="ranking-duration-tab" >
+                <button class="total-balance-ranking">
+                  Daily
+                </button>
+                <button class="total-balance-ranking">
+                  Weekly
+                </button>
+                <button class="total-balance-ranking">
+                  Monthly
+                </button>
+                <button class="total-balance-ranking">
+                  Total
+                </button>
+              </div>
+              <ul class="tab-inner-content-balance-rank">
+                <%  @daily_balance_rank.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p>  </span><p class="tx-address"><%= obj.address %> </p>: <%= Float(obj.balance).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-balance-rank">
+                <%  @weekly_balance_rank.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p> <p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-balance-rank">
+                <%  @monthly_balance_rank.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+              <ul class="tab-inner-content-balance-rank">
+                <%  @total_balance_rank.each_with_index do |obj, index| %>
+                  <li><p><%= index+1 %>: </p><p class="tx-address"><%= obj.address %> </p> : <%= Float(obj.balance).round(3) %> ETH</li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="tab-inner-content">
+          <div id="event-logs">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

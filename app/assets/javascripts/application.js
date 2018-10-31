@@ -11,12 +11,13 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require jquery
-//= require jquery_ujs
-//= require jquery-qrcode
 //= require bootstrap
 //= require activestorage
 //= require turbolinks
 //= require web3.min.js
+//= require jquery.min.js
+//= require jquery.jscrollpane.min.js
+//= require jquery.nicescroll.min.js
+//= require jquery.qrcode.min.js
 //= require abi-decoder/dist/abi-decoder.js
 //= require_tree .
