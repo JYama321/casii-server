@@ -1,0 +1,12 @@
+<% txs.each do  |tx| %>
+<UL><li><div class="BS_list1"><%= tx.t_hash %></div></li>
+  <li><div class="BS_list2">
+    <%= calculate_date_from_now(tx.updated_at)[0] == 0 ? '' : calculate_date_from_now(tx.updated_at)[0] %> days
+    <%= calculate_date_from_now(tx.updated_at)[1] == 0 ? '' : calculate_date_from_now(tx.updated_at)[1] %> hrs ago </div></li>
+  <li>
+    <div class="BS_list3">
+      <%= Float(tx.t_get - tx.t_send).round(3) %>
+    </div>
+  </li>
+</ul>
+<% end %>

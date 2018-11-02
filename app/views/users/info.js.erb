@@ -1,0 +1,7 @@
+$(".myp_add").html("<%= escape_javascript(render('components/user_address', { address: @user.address }))%>")
+$(".myp_total_all").html("<%= escape_javascript(render('components/user_total_balance', { total_value: @total_balance })) %>")
+$(".myp_total_send").html("<%= escape_javascript(render('components/user_total_balance',  { total_value: @total_balance_send })) %>")
+$(".myp_total_receive").html("<%= escape_javascript(render('components/user_total_balance', { total_value: @total_balance_receive })) %>")
+$(".user_tx_all").html("<%= escape_javascript(render('components/user_tx_data', { txs: @transactions, type: "all" })) %>")
+$(".user_tx_receive").html("<%= escape_javascript(render('components/user_tx_receive_data', { txs: @transactions, type: "receive"})) %>")
+$(".user_tx_send").html("<%= escape_javascript(render('components/user_tx_send_data', { txs: @transactions, type: "send"})) %>")

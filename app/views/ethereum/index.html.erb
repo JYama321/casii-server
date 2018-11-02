@@ -49,61 +49,63 @@
           <h2 class="tab-head-1 active-1"><%= image_tag("tab/tab_play.png", :width => "200", :alt => "play") %></h2>
           <div class="tabBody-1">
             <div class="inner">
-                <p>Halls</p>
-                <div class="play_btn">
-                  <input id="btn1-item1" type="radio" name="btn1" value="XX" onclick="playBTN1_1();" checked>
-                  <label class="play_btn_item btn1" for="btn1-item1">X2</label>
-                  <input id="btn1-item2" type="radio" name="btn1" value="XX" onclick="playBTN1_2();">
-                  <label class="play_btn_item btn1" for="btn1-item2">X3</label>
-                  <input id="btn1-item3" type="radio" name="btn1" value="XX" onclick="playBTN1_3();">
-                  <label class="play_btn_item btn1" for="btn1-item3">X6</label>
-                  <input id="btn1-item4" type="radio" name="btn1" value="XX" onclick="playBTN1_4();">
-                  <label class="play_btn_item btn1 last" for="btn1-item4">X10</label>
-                </div>
-                <p>The probability that you get jackpot is<br>
-                  proportion to value of ETH you bet.</p>
-                <div class="play_btn">
-                  <input id="btn2-item1" type="radio" name="btn2" value="XX" checked>
-                  <button class="play_btn_item btn2" onclick="playBTN2_1();">0.125</button>
-                  <input id="btn2-item2" type="radio" name="btn2" value="XX" onclick="playBTN2_2();">
-                  <button class="play_btn_item btn2" onclick="playBTN2_2()">0.25</button>
-                  <input id="btn2-item3" type="radio" name="btn2" value="XX">
-                  <button class="play_btn_item btn2" onclick="playBTN2_3()">0.50</button>
-                  <input id="btn2-item4" type="radio" name="btn2" value="XX">
-                  <button class="play_btn_item btn2" onclick="playBTN2_4()">1</button>
-                  <input id="btn2-item5" type="radio" name="btn2" value="XX">
-                  <button class="play_btn_item btn2 last" onclick="playBTN2_5()">2</button>
-                  <input id="btn2-item6" type="radio" name="btn2" value="XX">
-                  <button class="play_btn_item btn2" onclick="playBTN2_6()">4</button>
-                  <input id="btn2-item7" type="radio" name="btn2" value="XX">
-                  <button class="play_btn_item btn2" onclick="playBTN2_6()">8</button>
-                  <input id="btn2-item8" type="radio" name="btn2" value="XX" >
-                  <button class="play_btn_item btn2" onclick="playBTN2_8();">16</button>
-                  <input id="btn2-item9" type="radio" name="btn2" value="XX">
-                  <button class="play_btn_item btn2" onclick="playBTN2_9();">32</button>
-                  <input id="btn2-item10" type="radio" name="btn2" value="XX" >
-                  <button class="play_btn_item btn2 last" onclick="playBTN2_10();">64</button>
-                </div>
-                <dl class="play_bottom">
-                  <dd><%= image_tag("play/qr.png", :width => "150", :alt => "QR") %></dd>
-                  <dd>
-                    <div class="container">
-                      <div class="scroll-pane horizontal-only">
-                        <p id="current-hall-address">
-                          0x9cb4f5fb9bc5f3a3918c1d90c9f0
-                        </p>
-                      </div>
+              <p>Halls</p>
+              <div class="play_btn">
+                <input id="btn1-item1" type="radio" name="btn1" value="XX" onclick="playBTN1_1();" checked>
+                <label class="play_btn_item btn1" for="btn1-item1">X2</label>
+                <input id="btn1-item2" type="radio" name="btn1" value="XX" onclick="playBTN1_2();">
+                <label class="play_btn_item btn1" for="btn1-item2">X3</label>
+                <input id="btn1-item3" type="radio" name="btn1" value="XX" onclick="playBTN1_3();">
+                <label class="play_btn_item btn1" for="btn1-item3">X6</label>
+                <input id="btn1-item4" type="radio" name="btn1" value="XX" onclick="playBTN1_4();">
+                <label class="play_btn_item btn1 last" for="btn1-item4">X10</label>
+              </div>
+              <p>The probability that you get jackpot is<br>
+                proportion to value of ETH you bet.</p>
+              <div class="play_btn">
+                <input id="btn2-item1" type="radio" name="btn2" value="XX" checked>
+                <button class="play_btn_item btn2" onclick="playBTN2_1();">0.125</button>
+                <input id="btn2-item2" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2" onclick="playBTN2_2()">0.25</button>
+                <input id="btn2-item3" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2" onclick="playBTN2_3()">0.50</button>
+                <input id="btn2-item4" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2" onclick="playBTN2_4()">1</button>
+                <input id="btn2-item5" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2 last" onclick="playBTN2_5()">2</button>
+                <input id="btn2-item6" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2" onclick="playBTN2_6()">4</button>
+                <input id="btn2-item7" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2" onclick="playBTN2_7()">8</button>
+                <input id="btn2-item8" type="radio" name="btn2" value="XX" >
+                <button class="play_btn_item btn2" onclick="playBTN2_8();">16</button>
+                <input id="btn2-item9" type="radio" name="btn2" value="XX">
+                <button class="play_btn_item btn2" onclick="playBTN2_9();">32</button>
+                <input id="btn2-item10" type="radio" name="btn2" value="XX" >
+                <button class="play_btn_item btn2 last" onclick="playBTN2_10();">64</button>
+              </div>
+              <dl class="play_bottom">
+                <dd id="qr-code">
+                  <%#= image_tag("play/qr.png", :width => "150", :alt => "QR") %>
+                </dd>
+                <dd>
+                  <div class="container">
+                    <div class="scroll-pane horizontal-only">
+                      <p id="current-hall-address">
+                        0x9cb4f5fb9bc5f3a3918c1d90c9f0
+                      </p>
                     </div>
+                  </div>
 
-                    <div class="container">
-                      <div id="pbtn1">Hall type: x2</div>
-                    </div>
+                  <div class="container">
+                    <div id="pbtn1">Hall type: x2</div>
+                  </div>
 
-                    <div class="container">
-                      <div id="pbtn2">Bet Value: 0.125 </div>
-                    </div>
-                  </dd>
-                </dl>
+                  <div class="container">
+                    <div id="pbtn2">Bet Value: 0.125 </div>
+                  </div>
+                </dd>
+              </dl>
             </div><!-- /.inner -->
           </div><!-- /.tabBody -->
 
@@ -153,39 +155,26 @@
           <h2 class="tab-head-2 active-2"><%= image_tag("tab/tab_myp.png", :width => "165", :alt => "My Page") %></h2>
           <div class="tabBody-2">
             <div class="inner-2">
-              <div class="myp_add"><p>Your address</p>
-                <form action="XXXXX" method="post">
-                  <dl>
-                    <dd><input type="text" name="" value="0xd7860c2Bb8b2fDad44d4Db5c9ec2620926eC42f9" class="login_af"></dd>
-                    <dd><input type="submit" name="" value="edit"></dd>
-                  </dl>
-                </form>
+              <div class="myp_add">
+                  <%= render 'components/user_address_form' %>
               </div>
 
               <!-- ▼▼▼ 中 -->
               <div class="wrap-3">
-
                 <!---My page ALL START-->
                 <h2 class="tab-head-3 active-3">ALL</h2>
                 <div class="tabBody-3">
                   <div class="inner-3">
-                    <dl class="myp_total"><dd>total</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>Age</dd><dd>Value</dd></dl>
-
-                    <div class="myp_list"><div class="scroll-pane">
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-
-                    </div></div>
+                    <dl class="myp_total myp_total_all">
+                      <%= render('components/user_total_balance', { total_value: nil }) %>
+                    </dl>
+                    <div class="myp_list">
+                      <div class="scroll-pane">
+                        <div class="user_tx_all">
+                          <%= render('components/user_tx_data', { txs: [] }) %>
+                        </div>
+                      </div>
+                    </div>
                   </div><!-- /.inner -->
                 </div><!-- /.tabBody -->
 
@@ -193,23 +182,17 @@
                 <h2 class="tab-head-3">Receive ETH</h2>
                 <div class="tabBody-3">
                   <div class="inner-3">
-                    <dl class="myp_total"><dd>total</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>Age</dd><dd>Value</dd></dl>
+                    <dl class="myp_total myp_total_receive">
+                      <%= render('components/user_total_balance', { total_value: nil }) %>
+                    </dl>
 
-                    <div class="myp_list"><div class="scroll-pane">
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-                    </div></div>
-
+                    <div class="myp_list">
+                      <div class="scroll-pane">
+                          <div class="user_tx_receive">
+                            <%= render('components/user_tx_receive_data', { txs: [] }) %>
+                          </div>
+                      </div>
+                    </div>
                   </div><!-- /.inner -->
                 </div><!-- /.tabBody -->
 
@@ -218,21 +201,15 @@
                 <h2 class="tab-head-3">Send ETH</h2>
                 <div class="tabBody-3">
                   <div class="inner-3">
-                    <dl class="myp_total"><dd>total</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>Age</dd><dd>Value</dd></dl>
+                    <dl class="myp_total myp_total_send">
+                      <%= render('components/user_total_balance', { total_value: nil }) %>
+                    </dl>
 
-                    <div class="myp_list"><div class="scroll-pane">
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-                      <UL><li><div class="BS_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                        <li><div class="BS_list2">4 days 18 hrs ago (Oct-10-2018)</div></li>
-                        <li><div class="BS_list3">2ETH</div></li>
-                      </ul>
-
-
-
-                    </div></div>
+                    <div class="myp_list">
+                      <div class="scroll-pane user_tx_send">
+                        <%= render('components/user_tx_send_data', { txs: [] }) %>
+                      </div>
+                    </div>
 
                   </div><!-- /.inner -->
                 </div><!-- /.tabBody -->

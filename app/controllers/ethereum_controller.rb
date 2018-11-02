@@ -1,4 +1,5 @@
 class EthereumController < ApplicationController
+  protect_from_forgery except: :jackpot_ajax # searchアクションを除外
   require 'json'
   require 'jsonclient'
   include Common
@@ -35,7 +36,7 @@ class EthereumController < ApplicationController
 
   def jackpot_ajax
     parameters = {
-        "to":  params[:contract_address],
+        "to":  "0x9cb4f5fb9bc5f3a3918c1d90c9f0236406d6c106",
         "data": "0xf9cee0bdaca142eb8852e8754e169a688f0abf505c8ede1adb8e33381313327c",
     }
     res = infura_eth_call(parameters)

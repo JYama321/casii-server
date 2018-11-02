@@ -1,0 +1,11 @@
+<p>Your address</p>
+<%= form_tag('/users/info', remote: true) do %>
+  <dl>
+    <dd>
+      <%= text_field_tag "user[address]", "", {class: "login_af", placeholder: "please input your address" } %>
+    </dd>
+    <dd>
+      <%= submit_tag  "GO" %>
+    </dd>
+  </dl>
+<% end %>

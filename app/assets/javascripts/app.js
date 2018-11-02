@@ -36,6 +36,7 @@ function getWeb3() {
 }
 
 $(function(){
+    $.ajaxSetup({ headers : {'X-CSRF-TOKEN': $( 'meta [name = "csrf-token"]').attr("content")}});
     //submit address button
     // $('#address-submit-button').click(function(e) {
     //     e.preventDefault();
@@ -167,9 +168,7 @@ $(function(){
 
 
     //qr code 最初の表示
-    $('#hall-qr').qrcode({render: 'div', text: `ethereum:${contract_addresses[0]}?amount=${$('#bet-value').text().trim()}&gas=1000000`});
-    $('#contract-address-shown').html(contract_addresses[0]);
-    //abi-decoderへのabiセット。最初
+//abi-decoderへのabiセット。最初
     $.getJSON("/FiftyFifty.json", function(data){
         getWeb3().then(function(result){
             window.web3 = result.web3;
@@ -178,20 +177,22 @@ $(function(){
             window.contract_instance = contract.at(contract_addresses[0]);
         });
     });
+
     // $.ajax({
     //     url: "/ethereum/ranking/send",
     //     type: "POST"
     // });
-    // setInterval(function () {
-    //     console.log("QR Code クソ野郎死んじまえ");
-    //     $.ajax({
-    //         url: "/ethereum/jp",
-    //         type: "POST",
-    //         data: { contract_address: contract_addresses[hall_type_index] }
-    //     }).done(function(data){
-    //         $('.eth').html(data.jp)
-    //     })
-    // }, 2500);
+    setInterval(function () {
+        console.log("QR Code クソ野郎死んじまえ");
+        console.log(contract_addresses[0]);
+        $.ajax({
+            url: "/ethereum/jp",
+            type: "POST",
+            data: { contract_address: contract_addresses[0] }
+        }).done(function(data){
+            $('.eth').html(data.jp)
+        })
+    }, 2500);
     // setInterval(function () {
     //     $.ajax({
     //         url: "/ethereum/event",
@@ -278,4 +279,7 @@ $(function(){
     $(".BS3-3_list1 , .BS3-3_list2").niceScroll({cursorborder:"",cursorcolor:"#de9a56",cursorwidth:"3px",autohidemode: false});
     $(".BS3-4_list1 , .BS3-4_list2").niceScroll({cursorborder:"",cursorcolor:"#d4a94e",cursorwidth:"3px",autohidemode: false});
 
+
+    // insertQrCode
+    insertQrCode(0)
 });

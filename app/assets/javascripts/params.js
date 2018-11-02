@@ -6,4 +6,4 @@ const contract_addresses = [
     "0xee1efbd636991e262f2f3fb428a6d71aaf451c54"
 ];
 
-
+let addressIsEdit = false; //

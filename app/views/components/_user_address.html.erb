@@ -1,0 +1,10 @@
+<p>Your address</p>
+<%= form_tag('/users/edit', remote: true) do %>
+<dl>
+  <dd>
+    <div id="user_input_address"><%= address %></div></dd>
+  <dd>
+    <%= submit_tag  "Edit" %>
+  </dd>
+</dl>
+<% end %>
