@@ -156,7 +156,7 @@
           <div class="tabBody-2">
             <div class="inner-2">
               <div class="myp_add">
-                  <%= render 'components/user_address_form' %>
+                <%= render 'components/user_address_form' %>
               </div>
 
               <!-- ▼▼▼ 中 -->
@@ -188,9 +188,9 @@
 
                     <div class="myp_list">
                       <div class="scroll-pane">
-                          <div class="user_tx_receive">
-                            <%= render('components/user_tx_receive_data', { txs: [] }) %>
-                          </div>
+                        <div class="user_tx_receive">
+                          <%= render('components/user_tx_receive_data', { txs: [] }) %>
+                        </div>
                       </div>
                     </div>
                   </div><!-- /.inner -->
@@ -316,20 +316,15 @@
           <h2 class="tab-head-2"><%= image_tag("tab/tab_his.png", :width => "165", :alt => "History") %></h2>
           <div class="tabBody-2">
             <div class="inner-2">
-              <dl class="his_total"><dd>total TX</dd><dd><span>33ETH</span><dd>Txhash</dd><dd>From</dd><dd>Value</dd></dl>
-
-              <div class="his_list"><div class="scroll-pane">
-                <UL><li><div class="BS2_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                  <li><div class="BS2_list2">0x494d5c0a7f29bb8cb4c11347f</div></li>
-                  <li><div class="BS2_list3">1.95ETH</div></li>
-                </ul>
-                <UL><li><div class="BS2_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
-                  <li><div class="BS2_list2">0x494d5c0a7f29bb8cb4c11347f</div></li>
-                  <li><div class="BS2_list3">1.95ETH</div></li>
-                </ul>
-
-
-              </div></div>
+              <dl class="his_total"><dd>total TX</dd><dd><span class="history-total-eth">0ETH</span><dd>Txhash</dd><dd>From</dd><dd>Value</dd></dl>
+              <div class="his_list">
+                <div class="scroll-pane history-all">
+                  <UL><li><div class="BS2_list1">0x9cb4f5fb9bc5f3a3918c1d90c9f0</div></li>
+                    <li><div class="BS2_list2">0x494d5c0a7f29bb8cb4c11347f</div></li>
+                    <li><div class="BS2_list3">1.95ETH</div></li>
+                  </ul>
+                </div>
+              </div>
             </div><!-- /.inner -->
           </div><!-- /.tabBody -->
         </div><!-- /.wrap -->

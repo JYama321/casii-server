@@ -107,7 +107,21 @@ function insertQrCode(index) {
     $("#qr-code").qrcode({ width: 130, height: 130, text: `ethereum:${contract_addresses[index]}?amount=${value}`})
 }
 
-
+function getHallType () {
+    const hallType = $('#pbtn1').text().trim();
+    switch (hallType) {
+        case "Hall type: x2":
+            return 0;
+        case "Hall type: x3":
+            return 1;
+        case "Hall type: x6":
+            return 2;
+        case "Hall type: x10":
+            return 3;
+        default:
+            return 0;
+    }
+}
 
 // change user address button state
 function changeBtnState() {

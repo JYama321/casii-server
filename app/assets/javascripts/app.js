@@ -26,7 +26,6 @@ function getWeb3() {
             web3 = new Web3();
 
             web3.setProvider(new web3.providers.HttpProvider("https://rinkeby.infura.io/v3/c80185451d9f44f9848cfb331df03c35"));
-
             results = {
                 web3: web3
             };
@@ -174,17 +173,29 @@ $(function(){
             window.web3 = result.web3;
             const contract = window.web3.eth.contract(data.abi);
             abiDecoder.addABI(data.abi);
-            window.contract_instance = contract.at(contract_addresses[0]);
+            window.contract_instance = contract.at(contract_addresses[getHallType()]);
+            console.log(window.web3.sha3("Bet(address,address,uint256,uint256,uint256)", { encoding: 'hex' }));
+            $.ajax({
+                url: "https://rinkeby.infura.io/v3/2f42131ae42e463c8c475d1090903783",
+                type: "POST",
+                data: JSON.stringify({"jsonrpc": "2.0", "method": "eth_getLogs", "params": [{"fromBlock":"0x0", "toBlock": "latest",address: contract_addresses[0] }], "id": 1}),
+                dataType: "json",
+                success: (data) => {
+                    updateHistories(data.result)
+                },
+                error: (err) => {
+                    console.log(err)
+                }
+            })
         });
     });
+
 
     // $.ajax({
     //     url: "/ethereum/ranking/send",
     //     type: "POST"
     // });
     setInterval(function () {
-        console.log("QR Code クソ野郎死んじまえ");
-        console.log(contract_addresses[0]);
         $.ajax({
             url: "/ethereum/jp",
             type: "POST",
@@ -220,6 +231,8 @@ $(function(){
     //         }
     //     })
     // }, 2500);
+
+
 
 
     // タブ関連

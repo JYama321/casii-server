@@ -1,21 +1,30 @@
 version: '3'
 services:
-  db:
+  casino_db:
     image: mysql:5.7
     environment:
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: casino_user
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_PASSWORD: mysql_password
     ports:
     - '3316:3306'
     volumes:
-    - ../db/mysql/volumes:/var/lib/mysql
+    - db-data:/var/lib/mysql
 
-  web:
-    build: ./containers/
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+  casino_webapp:
+    build: .
+    command: bundle exec puma -C config/puma.rb
     volumes:
-    - ../*:/casii
+    - ./:/webapp
+    - public-data:/sc_casino/public
+    - tmp-data:/sc_casino/tmp
+    - log-data:/sc_casino/log
     ports:
-    - "3000:3000"
+    - "80:3000"
     depends_on:
-    - db
+    - casino_db
+volumes:
+  public-data:
+  tmp-data:
+  log-data:
+  db-data:

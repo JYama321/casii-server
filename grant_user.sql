@@ -1,0 +1,1 @@
+GRANT ALL PRIVILEGES ON *.* TO 'casino_user'@'%' IDENTIFIED BY 'mysql_password';
